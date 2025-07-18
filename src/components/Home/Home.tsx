@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function HeroBanner() {
   return (
-    <section className="bg-gradient-to-br from-blue-100 to-blue-200 py-20 md:py-28">
+    <section className="bg-blue-100 py-20 md:py-28">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center">
           {/* Headline */}
