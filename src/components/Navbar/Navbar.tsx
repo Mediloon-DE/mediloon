@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import Logo from "../Common/Logo";
+import { navItems } from "@/utils/constants"
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,33 +21,20 @@ export default function Navbar() {
 
                     {/* Desktop-Navigation */}
                     <div className="hidden md:flex items-center space-x-8">
-                        <Link
-                            href="/"
-                            className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
-                        >
-                            Startseite
-                        </Link>
-                        <Link
-                            href="#"
-                            className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
-                        >
-                            Produkte
-                        </Link>
-                        <Link
-                            href="#"
-                            className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
-                        >
-                            Über Uns
-                        </Link>
-                        <Link
-                            href="#"
-                            className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
-                        >
-                            Kontakt
-                        </Link>
+                        {
+                            navItems.map((item) => (
+                                <Link
+                                    key={item.name}
+                                    href={item.href}
+                                    className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-md font-medium"
+                                >
+                                    {item.name}
+                                </Link>
+                            ))
+                        }                       
 
                         {/* Warenkorb-Icon */}
-                        <button className="relative text-gray-700 hover:text-blue-600">
+                        {/* <button className="relative text-gray-700 hover:text-blue-600">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="h-6 w-6"
@@ -64,7 +52,7 @@ export default function Navbar() {
                             <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                                 0
                             </span>
-                        </button>
+                        </button> */}
                     </div>
 
                     {/* Mobile-Menü-Button */}
@@ -104,33 +92,15 @@ export default function Navbar() {
             {isMenuOpen && (
                 <div className="md:hidden bg-white">
                     <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                        <Link
-                            href="/"
-                            className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
-                        >
-                            Startseite
-                        </Link>
-                        <Link
-                            href="#"
-                            className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
-                        >
-                            Produkte
-                        </Link>
-                        <Link
-                            href="#"
-                            className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
-                        >
-                            Über Uns
-                        </Link>
-                        <Link
-                            href="#"
-                            className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
-                        >
-                            Kontakt
-                        </Link>
-                        <div className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">
-                            Warenkorb (0)
-                        </div>
+                        {navItems.map((item) => (
+                            <Link
+                                key={item.name}
+                                href={item.href}
+                                className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium"
+                            >
+                                {item.name}
+                            </Link>
+                        ))}
                     </div>
                 </div>
             )}

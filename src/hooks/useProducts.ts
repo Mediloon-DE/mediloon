@@ -9,21 +9,35 @@ export interface Product {
     storeId: {
         _id: string;
         name: string;
+        location: string;
     };
     createdAt: string;
     updatedAt: string;
 }
 
-// Fetch all products for current user
-export const fetchProducts = async (): Promise<Product[]> => {
-    const response = await axios.get("/products");
+// Fetch multiple products for a store
+export const fetchProducts = async (storeId: string): Promise<Product[]> => {
+    const response = await axios.get(`/stores/${storeId}/products`);
     return response.data.data;
 };
 
-// React Query hooks
-export const useProducts = () => {
-    return useQuery<Product[]>({
-        queryKey: ["products"],
-        queryFn: fetchProducts,
+export const useProducts = (storeId: string) => {
+    return useQuery<Product[]>({ // Note the array type here
+        queryKey: ["products", storeId],
+        queryFn: () => fetchProducts(storeId),
+        enabled: !!storeId,
+    });
+};
+
+export const fetchpProduct = async (id: string): Promise<Product> => {
+    const response = await axios.get(`/products/${id}`);
+    return response.data.data;
+};
+
+export const useProduct = (id: string) => {
+    return useQuery<Product>({
+        queryKey: ["product", id],
+        queryFn: () => fetchpProduct(id),
+        enabled: !!id, 
     });
 };

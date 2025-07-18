@@ -1,37 +1,27 @@
-import Image from "next/image";
+
+import Link from "next/link";
 
 interface Product {
-    id: string;
+    _id: string;
     name: string;
     price: number;
-    image: string;
-    category: string;
+    quantity: number;
+    image?: string;
+    category?: string;
 }
 
 export default function ProductCard({ product }: { product: Product }) {
     return (
-        <div
-            className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300 flex flex-col h-full">
-            <div className="relative h-48 w-full">
-                <Image src={product.image} alt={product.name} fill className="object-cover"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" />
+        <Link
+            href={`/products/${product._id}`}
+            className="border border-gray-300 rounded-lg overflow-hidden hover:shadow-md transition-shadow"
+        >
+            {/* <div className="bg-gray-500 aspect-square"></div> */}
+            <div className="p-4">
+                <h3 className="font-medium">{product.name}</h3>
+                <p className="text-gray-600 mt-1">€{product.price}</p>
+                <p className="text-gray-600 mt-1">availability {product.quantity}</p>
             </div>
-            
-            <div className="p-4 flex flex-col flex-grow">
-                <span className="text-sm text-gray-500 mb-2">{product.category}</span>
-                <h3 className="text-lg font-semibold text-gray-800 line-clamp-2 min-h-[3rem]">
-                    {product.name}
-                </h3>
-                <div className="mt-auto pt-3 flex justify-between items-center">
-                    <span className="text-2xl font-bold text-red-700">
-                        €{product.price.toFixed(2)}
-                    </span>
-                    <button
-                        className="bg-gray-700 text-white px-3 py-1 rounded-md text-sm hover:bg-gray-800 transition duration-300 whitespace-nowrap cursor-pointer">
-                        In den Warenkorb
-                    </button>
-                </div>
-            </div>
-        </div>
+        </Link>
     );
 }

@@ -1,8 +1,12 @@
-import Products from "@/components/Products/Products";
+import HomePage from "@/components/Home/Home";
+import AllStores from "@/components/Stores/AllStores";
 
 
 export default function Home() {
   return (
-    <Products />
+    <div className="flex flex-col">
+      <HomePage />
+      <AllStores />
+    </div>
   );
 }
