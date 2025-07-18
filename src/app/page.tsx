@@ -1,12 +1,12 @@
-import HomePage from "@/components/Home/Home";
-import AllStores from "@/components/Stores/AllStores";
+import HeroBanner from "@/components/Home/Home";
+
 
 
 export default function Home() {
   return (
     <div className="flex flex-col">
-      <HomePage />
-      <AllStores />
+      <HeroBanner />
+      
     </div>
   );
 }
