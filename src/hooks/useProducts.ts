@@ -15,6 +15,21 @@ export interface Product {
     updatedAt: string;
 }
 
+// Fetch all products
+export const fetchAllProducts = async (): Promise<Product[]> => {
+    const response = await axios.get(`/products`);
+    return response.data.data;
+};
+
+export const useAllProducts = () => {
+    return useQuery<Product[]>({
+        queryKey: ["allProducts"],
+        queryFn: () => fetchAllProducts(),
+        enabled: true,
+        staleTime: 1000 * 60 * 1,
+    });
+};
+
 // Fetch multiple products for a store
 export const fetchProducts = async (storeId: string): Promise<Product[]> => {
     const response = await axios.get(`/stores/${storeId}/products`);

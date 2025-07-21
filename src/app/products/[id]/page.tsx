@@ -85,7 +85,7 @@ export default function ProductPage(props: {
                 <div className="space-y-0">
                     <div className="relative w-full pb-[60%] bg-gray-100 rounded-lg overflow-hidden">
                         <Image
-                            src="/images/paracetamol.jpg"
+                            src="/images/paracetamol.png"
                             alt={product.name}
                             fill
                             className="object-cover"
@@ -94,19 +94,20 @@ export default function ProductPage(props: {
                             sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
                         />
                     </div>
-                    {/* <div className="grid grid-cols-4 gap-2">
-                        {[...Array(4)].map((_, i) => (
-                            <div key={i} className="bg-gray-100 rounded-md aspect-square overflow-hidden">
+                    <div className="grid grid-cols-3 gap-2 mt-5">
+                        {[...Array(3)].map((_, i) => (
+                            <div key={i} className="h-[150px] w-[200px] relative rounded-lg overflow-hidden">
                                 <Image
-                                    src="/images/paracetamol.jpg"
-                                    alt={`${product.name} thumbnail ${i + 1}`}
-                                    className="object-cover w-full h-full"
-                                    width={100}
-                                    height={100}
+                                    src="/images/paracetamol.png"
+                                    alt={product.name}
+                                    className="w-full h-full object-cover"
+                                    width={150}
+                                    height={200}
+                                    priority
                                 />
                             </div>
                         ))}
-                    </div> */}
+                    </div>
                 </div>
 
                 {/* Product Details */}
@@ -117,8 +118,8 @@ export default function ProductPage(props: {
                             <span className="text-2xl font-semibold text-gray-900">
                                 €{product.price.toFixed(2)}
                             </span>
-                            <span className={`px-2 py-1 text-sm rounded-full ${isInStock ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                                {isInStock ? 'In Stock' : 'Out of Stock'}
+                            <span className={`px-2 py-1 text-sm rounded-md ${isInStock ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-800'}`}>
+                                {isInStock ? 'Available' : 'Out of Stock'}
                             </span>
                         </div>
                     </div>
@@ -136,14 +137,14 @@ export default function ProductPage(props: {
 
                     <div className="flex gap-4 pt-6">
                         <Button
-                            className="bg-blue-600 hover:bg-blue-700 px-6 py-3"
+                            className="bg-pink-600 hover:bg-pink-700 px-6 py-3 cursor-pointer"
                             disabled={!isInStock}
                         >
                             Add to Cart
                         </Button>
                         <Button
                             variant="outline"
-                            className="px-6 py-3 border-blue-600 text-blue-600 hover:bg-blue-50"
+                            className="px-6 py-3 border-pink-600 text-pink-600 hover:bg-pink-600 hover:text-white cursor-pointer"
                             disabled={!isInStock}
                         >
                             Buy Now
