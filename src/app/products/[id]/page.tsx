@@ -94,9 +94,9 @@ export default function ProductPage(props: {
                             sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
                         />
                     </div>
-                    <div className="grid grid-cols-3 gap-2 mt-5">
+                    <div className="grid grid-cols-3 gap-0 mt-10">
                         {[...Array(3)].map((_, i) => (
-                            <div key={i} className="h-[150px] w-[200px] relative rounded-lg overflow-hidden">
+                            <div key={i} className="h-[120px] w-[170px] relative rounded-lg overflow-hidden shadow-lg border">
                                 <Image
                                     src="/images/paracetamol.png"
                                     alt={product.name}
@@ -115,7 +115,7 @@ export default function ProductPage(props: {
                     <div>
                         <h1 className="text-3xl font-bold text-gray-900">{product.name}</h1>
                         <div className="mt-4 flex items-center gap-2">
-                            <span className="text-2xl font-semibold text-gray-900">
+                            <span className="text-2xl font-extrabold text-pink-600">
                                 €{product.price.toFixed(2)}
                             </span>
                             <span className={`px-2 py-1 text-sm rounded-md ${isInStock ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-800'}`}>

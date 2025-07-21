@@ -23,12 +23,12 @@ export default function StorePage(props: {
     return (
       <div className="flex flex-col py-8">
         <div className="mb-8 space-y-4">
-          <Skeleton className="h-8 w-1/2" />
-          <Skeleton className="h-4 w-1/3" />
+          <Skeleton className="h-8 w-1/2 bg-gray-200" />
+          <Skeleton className="h-4 w-1/3 bg-gray-200" />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {[...Array(4)].map((_, i) => (
-            <Skeleton key={i} className="h-64 rounded-lg" />
+            <Skeleton key={i} className="h-64 rounded-lg bg-gray-200" />
           ))}
         </div>
       </div>
@@ -58,7 +58,7 @@ export default function StorePage(props: {
         <h1 className="text-3xl font-bold">{store?.name}</h1>
         <div className="flex items-center gap-1 text-gray-600 mt-2">
           <MapPin className="h-4 w-4" />
-          <p className="text-gray-600 ">{store?.location}</p>
+          <p className="text-gray-600 ">{store?.location.toUpperCase()}</p>
         </div>
         
       </div>

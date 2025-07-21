@@ -15,8 +15,8 @@ export default function Navbar() {
                 <div className="flex justify-between h-16">
                     {/* Logo */}
                     <div className="flex items-center">
-                        <Link href="/" className="text-xl font-bold text-blue-600">
-                            <Logo className={"text-gray-800 hover:text-gray-900"} />
+                        <Link href="/" className="">
+                            <Logo className={"font-bold text-gray-900"} />
                         </Link>
                     </div>
 

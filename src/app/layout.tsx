@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Mediloon Store",
-  description: "Mediloon Store",
+  description: "Premium online pharmacy for Germany",
 };
 
 export default function RootLayout({

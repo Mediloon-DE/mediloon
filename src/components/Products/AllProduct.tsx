@@ -18,9 +18,9 @@ const AllProduct = () => {
     }
 
     return (
-        <div className="w-full mx-auto p-4">
+        <div className="w-full mx-auto flex justify-center items-center">
             {/* Show All Products Link */}
-            
+
 
             {/* Products Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
@@ -37,22 +37,40 @@ const AllProduct = () => {
                         <Link
                             key={product._id}
                             href={`/products/${product._id}`}
-                            className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col hover:shadow-lg transition-shadow"
+                            className="group border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-all duration-300 hover:border-pink-400 flex flex-col h-[350px]"
                         >
-                            <div className="h-[200px] bg-gray-100 relative">
+                            {/* Image Container */}
+                            <div className="relative aspect-square bg-gray-100 overflow-hidden">
                                 <Image
                                     src="/images/paracetamol.png"
                                     alt={product.name}
-                                    className="w-full h-full object-cover"
-                                    width={300}
-                                    height={300}
-                                    priority
+                                    fill
+                                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+                                    quality={80}
+                                    priority={false}
                                 />
                             </div>
+
+                            {/* Product Info */}
                             <div className="p-4 flex-grow flex flex-col">
-                                <h3 className="font-semibold text-lg line-clamp-1">{product.name}</h3>
-                                <div className="mt-auto flex justify-between items-center">
-                                    <span className="font-bold text-lg">€{product.price}</span>
+                                <h3 className="font-medium text-gray-900 line-clamp-2">
+                                    {product.name}
+                                </h3>
+
+                                <div className="mt-3 flex items-center justify-between">
+                                    <p className="text-lg font-semibold text-pink-600">
+                                        €{product.price.toFixed(2)}
+                                    </p>
+                                    {product.quantity > 0 ? (
+                                        <span className="text-xs px-2 py-1 bg-green-100 text-green-800 rounded-full">
+                                            In Stock
+                                        </span>
+                                    ) : (
+                                        <span className="text-xs px-2 py-1 bg-red-100 text-red-800 rounded-full">
+                                            Out of Stock
+                                        </span>
+                                    )}
                                 </div>
                             </div>
                         </Link>

@@ -66,7 +66,7 @@ const ProductCarousel = () => {
               <div className="p-4 flex-grow flex flex-col">
                 <h3 className="font-semibold text-lg line-clamp-1">{product.name}</h3>
                 <div className="mt-auto flex justify-between items-center">
-                  <span className="font-bold text-lg">€{product.price}</span>
+                  <span className="font-extrabold text-xl text-pink-600">€{product.price}</span>
                 </div>
               </div>
             </Link>

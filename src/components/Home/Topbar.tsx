@@ -11,12 +11,12 @@ const Topbar = () => {
 
     return (
         <div className="flex flex-col w-full items-center ">
-            <div className="w-full bg-[#ffc8b3] rounded-sm p-2 flex justify-start items-center gap-2">
+            <div className="w-full bg-pink-100 rounded-sm p-2 flex justify-start items-center gap-2">
 
                 {/* Menu Icon and Dropdown */}
                 <div className="relative">
                     <button
-                        className="p-2 focus:outline-none hover:bg-amber-600 rounded transition-colors"
+                        className="p-2 focus:outline-none hover:bg-pink-200 rounded transition-colors"
                         aria-label="Menu"
                         onMouseEnter={() => setIsMenuOpen(true)}
                     >
