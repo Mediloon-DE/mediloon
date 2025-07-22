@@ -94,8 +94,8 @@ export default function ProductPage(props: {
                             sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
                         />
                     </div>
-                    <div className="grid grid-cols-3 gap-0 mt-10">
-                        {[...Array(3)].map((_, i) => (
+                    <div className="hidden  md:grid md:grid-cols-2 gap-0 mt-10 max-w-md mx-auto">
+                        {[...Array(2)].map((_, i) => (
                             <div key={i} className="h-[120px] w-[170px] relative rounded-lg overflow-hidden shadow-lg border">
                                 <Image
                                     src="/images/paracetamol.png"

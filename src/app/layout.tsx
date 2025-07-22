@@ -30,7 +30,7 @@ export default function RootLayout({
       <body
         className={`w-[calc(100%-var(--removed-body-scroll-bar-size,0px))] ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="flex flex-col bg-white max-w-[1440px] mx-auto min-h-screen">
+        <div className="flex flex-col bg-white max-w-[1280px] mx-auto min-h-screen">
           <QueryProvider>
             <Navbar />
             {children}
