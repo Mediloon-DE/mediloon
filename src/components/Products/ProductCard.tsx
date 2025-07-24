@@ -14,7 +14,7 @@ export default function ProductCard({ product }: { product: Product }) {
     return (
         <Link
             href={`/products/${product._id}`}
-            className="group border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-all duration-300 hover:border-pink-400 flex flex-col h-[350px]"
+            className="group border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-all duration-300 hover:border-primary flex flex-col h-[350px]"
         >
             {/* Image Container */}
             <div className="relative aspect-square bg-gray-100 overflow-hidden">
@@ -48,7 +48,7 @@ export default function ProductCard({ product }: { product: Product }) {
                 </h3>
 
                 <div className="mt-3 flex items-center justify-between">
-                    <p className="text-lg font-semibold text-pink-600">
+                    <p className="text-lg font-semibold text-primary">
                         €{product.price.toFixed(2)}
                     </p>
                     {product.quantity > 0 ? (

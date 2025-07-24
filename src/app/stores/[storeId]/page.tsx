@@ -55,7 +55,7 @@ export default function StorePage(props: {
   return (
     <div className="flex flex-col py-8 px-2">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold">{store?.name}</h1>
+        <h1 className="text-3xl font-bold text-primary">{store?.name}</h1>
         <div className="flex items-center gap-1 text-gray-600 mt-2">
           <MapPin className="h-4 w-4" />
           <p className="text-gray-600 ">{store?.location.toUpperCase()}</p>

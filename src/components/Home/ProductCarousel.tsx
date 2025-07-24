@@ -18,14 +18,15 @@ const ProductCarousel = () => {
   }
 
   return (
-    <div className="w-full mx-auto p-4 mt-8">
+    <div className="w-full mx-auto p-4">
       {/* Show All Products Link */}
-      <div className="flex justify-end mb-4">
+      <div className="flex justify-between mb-4">
+        <h2 className="text-2xl font-bold">Our recommendations</h2>
         <Link
           href="/products"
-          className="text-blue-600 hover:text-blue-800 font-medium flex items-center"
+          className="text-natural-900 hover:text-primary font-medium flex items-center"
         >
-          Show all products <span className="ml-1">→</span>
+          Show all products <span className="text-primary ml-1 text-2xl">→</span>
         </Link>
       </div>
 
@@ -44,9 +45,9 @@ const ProductCarousel = () => {
             <Link
               key={product._id}
               href={`/products/${product._id}`}
-              className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col hover:shadow-lg transition-shadow"
+              className="bg-white rounded-md shadow-xl overflow-hidden flex flex-col hover:shadow-lg transition-shadow"
             >
-              <div className="h-[200px] bg-gray-100 relative">
+              <div className="h-[200px] relative">
                 <Image
                   src="/images/paracetamol.png"
                   alt={product.name}
@@ -66,7 +67,7 @@ const ProductCarousel = () => {
               <div className="p-4 flex-grow flex flex-col">
                 <h3 className="font-semibold text-lg line-clamp-1">{product.name}</h3>
                 <div className="mt-auto flex justify-between items-center">
-                  <span className="font-extrabold text-xl text-pink-600">€{product.price}</span>
+                  <span className="font-extrabold text-xl text-primary">€{product.price}</span>
                 </div>
               </div>
             </Link>

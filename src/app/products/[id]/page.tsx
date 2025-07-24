@@ -114,7 +114,7 @@ export default function ProductPage(props: {
                     <div>
                         <h1 className="text-3xl font-bold text-gray-900">{product.name}</h1>
                         <div className="mt-4 flex items-center gap-2">
-                            <span className="text-2xl font-extrabold text-pink-600">
+                            <span className="text-2xl font-extrabold text-primary">
                                 €{product.price.toFixed(2)}
                             </span>
                             <span className={`px-2 py-1 text-sm rounded-md ${isInStock ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-800'}`}>
@@ -136,14 +136,14 @@ export default function ProductPage(props: {
 
                     <div className="flex gap-4 pt-6">
                         <Button
-                            className="bg-pink-600 hover:bg-pink-700 px-6 py-3 cursor-pointer"
+                            className="bg-primary hover:bg-red-700 px-6 py-3 cursor-pointer"
                             disabled={!isInStock}
                         >
                             Add to Cart
                         </Button>
                         <Button
                             variant="outline"
-                            className="px-6 py-3 border-pink-600 text-pink-600 hover:bg-pink-600 hover:text-white cursor-pointer"
+                            className="px-6 py-3 border-primary text-primary hover:bg-primary hover:text-white cursor-pointer"
                             disabled={!isInStock}
                         >
                             Buy Now

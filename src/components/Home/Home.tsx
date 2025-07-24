@@ -6,12 +6,12 @@
 
 export default function HeroBanner() {
   return (
-    <section className="py-10 md:py-10">
+    <section className="py-10 md:py-10 ">
       <div className="container mx-auto px-4">
         <div className="max-w-7xl mx-auto text-center">
           {/* Headline */}
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-            Premium <span className="text-pink-600">online pharmacy </span>
+            Premium <span className="text-primary">online pharmacy </span>
             for Germany
           </h1>
 

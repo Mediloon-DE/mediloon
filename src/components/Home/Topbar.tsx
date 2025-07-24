@@ -10,17 +10,20 @@ const Topbar = () => {
     const { data: stores, isLoading: storesLoading, error: storesError } = useStores();
 
     return (
-        <div className="flex flex-col w-full items-center ">
-            <div className="w-full bg-pink-100 rounded-sm p-2 flex justify-start items-center gap-2">
+        <div className="flex flex-col w-full items-center my-5 ">
+            <div className="w-full rounded-sm p-2 flex justify-start items-center gap-2">
 
                 {/* Menu Icon and Dropdown */}
                 <div className="relative">
                     <button
-                        className="p-2 focus:outline-none hover:bg-pink-200 rounded transition-colors"
+                        className="p-2 focus:outline-none rounded transition-colors"
                         aria-label="Menu"
                         onMouseEnter={() => setIsMenuOpen(true)}
                     >
-                        <AlignJustify className="h-6 w-6" />
+                        <div className='flex flex-row my-auto gap-2 text-gray-700 hover:text-primary'>
+                            <AlignJustify className="h-6 w-6" />
+                            <p className='text-base font-bold '>Categories</p>
+                        </div>
                     </button>
 
                     {/* Dropdown Menu */}
@@ -93,8 +96,9 @@ const Topbar = () => {
                         </div>
                     )}
                 </div>
-                <div className="flex flex-row gap-2">
-                    <Link href="/products" className="text-base font-bold text-gray-700 hover:text-gray-900">drug</Link>
+                <div>|</div>
+                <div className="flex flex-row gap-2 text-gray-700 hover:text-primary">
+                    <Link href="/products" className="text-base font-bold">drug</Link>
                 </div>
             </div>
         </div>

@@ -12,7 +12,7 @@ export default function Navbar() {
 
 
     return (
-        <nav className="bg-white shadow-md">
+        <nav className="bg-white shadow-sm">
             <div className="max-w-full mx-auto px-4 sm:px-6">
                 <div className="flex justify-between h-16 items-center">
                     {/* Logo */}
@@ -42,13 +42,13 @@ export default function Navbar() {
                         } */}
 
                         {/* user-Icon */}
-                        <button className="relative text-gray-700 hover:text-pink-600">
+                        <button className="relative text-gray-700 hover:text-primary">
                             <UserRound className="w-8 h-8" />
                         </button>
                         {/* Warenkorb-Icon */}
-                        <button className="relative text-gray-700 hover:text-pink-600">
+                        <button className="relative text-gray-700 hover:text-primary">
                             <ShoppingCart className="w-8 h-8" />
-                            <span className="absolute -top-2 -right-3 bg-pink-600 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center">
+                            <span className="absolute -top-2 -right-3 bg-primary text-white text-xs rounded-full h-6 w-6 flex items-center justify-center">
                                 0
                             </span>
                         </button>
