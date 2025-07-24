@@ -38,11 +38,11 @@ const SearchBox = () => {
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onFocus={() => setIsFocused(true)}
                     onBlur={() => setTimeout(() => setIsFocused(false), 200)}
-                    className="w-full py-3 pl-4 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    className="w-full py-3 pl-4 rounded-2xl border border-gray-300 focus:outline-none focus:ring-1 focus:ring-pink-500"
                 />
                 <button
                     type="submit"
-                    className="absolute p-3.5 pr-8 rounded-r-full right-0.5 top-1/2 bg-pink-600 transform -translate-y-1/2 text-white cursor-pointer hover:bg-pink-700 transition-colors"
+                    className="absolute py-4 px-5 -mr-0.5 rounded-r-2xl right-0.5 top-1/2 bg-pink-600 transform -translate-y-1/2 text-white cursor-pointer hover:bg-pink-700 transition-colors"
                 >
                     <Search className="w-5 h-5" />
                 </button>
