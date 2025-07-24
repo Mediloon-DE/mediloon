@@ -8,10 +8,7 @@ export async function GET(request: Request, productData: { params: Params }) {
     const params = await productData.params
     const storeId = params.storeId
     try {
-        await connectToDB();
-
-        // Validate storeId format
-        
+        await connectToDB();        
 
         const store = await Store.findById(storeId)
             .select('name location createdAt')

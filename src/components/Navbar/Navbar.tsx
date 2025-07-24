@@ -5,23 +5,30 @@ import { useState } from "react";
 import Logo from "../Common/Logo";
 import { navItems } from "@/utils/constants"
 import { ShoppingCart, UserRound } from "lucide-react";
+import SearchBox from "../Common/SearchBox";
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+
     return (
         <nav className="bg-white shadow-md">
-            <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between h-16">
+            <div className="max-w-full mx-auto px-4 sm:px-6">
+                <div className="flex justify-between h-16 items-center">
                     {/* Logo */}
-                    <div className="flex items-center">
+                    <div className="flex items-center md:flex-1">
                         <Link href="/" className="">
                             <Logo className={"font-bold text-gray-900"} />
                         </Link>
                     </div>
 
+                    {/* Search Box - Center */}
+                    <div className="hidden md:flex flex-1">
+                        <SearchBox />
+                    </div>
+
                     {/* Desktop-Navigation */}
-                    <div className="hidden md:flex items-center space-x-8">
+                    <div className="hidden md:flex items-center justify-end space-x-8 md:flex-1">
                         {/* {
                             navItems.map((item) => (
                                 <Link
@@ -32,7 +39,7 @@ export default function Navbar() {
                                     {item.name}
                                 </Link>
                             ))
-                        }                        */}
+                        } */}
 
                         {/* user-Icon */}
                         <button className="relative text-gray-700 hover:text-pink-600">
@@ -83,6 +90,11 @@ export default function Navbar() {
             {/* Mobile-Navigation */}
             {isMenuOpen && (
                 <div className="md:hidden bg-white">
+                    {/* Mobile Search Box - Only visible when menu is open */}
+                    <div className="px-4 py-3">
+                        <SearchBox />
+                    </div>
+
                     <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                         {navItems.map((item) => (
                             <Link

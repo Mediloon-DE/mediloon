@@ -75,7 +75,6 @@ export default function ProductPage(props: {
         );
     }
 
-    // Type guard to ensure quantity exists
     const isInStock = product.quantity !== undefined && product.quantity > 0;
 
     return (
