@@ -19,6 +19,7 @@ const Topbar = () => {
                         className="p-2 focus:outline-none rounded transition-colors"
                         aria-label="Menu"
                         onMouseEnter={() => setIsMenuOpen(true)}
+                        // onMouseLeave={() => setIsMenuOpen(false)}
                     >
                         <div className='flex flex-row my-auto gap-2 text-gray-700 hover:text-primary'>
                             <AlignJustify className="h-6 w-6" />
@@ -97,8 +98,9 @@ const Topbar = () => {
                     )}
                 </div>
                 <div>|</div>
-                <div className="flex flex-row gap-2 text-gray-700 hover:text-primary">
-                    <Link href="/products" className="text-base font-bold">drug</Link>
+                <div className="flex flex-row gap-8 pl-5 text-gray-700 ">
+                    <Link href="/products" className="text-base font-bold hover:text-primary">drug</Link>
+                    <Link href="/stores" className="text-base font-bold hover:text-primary">Medical supply store</Link>
                 </div>
             </div>
         </div>
