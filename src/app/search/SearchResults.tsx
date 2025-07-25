@@ -1,16 +1,17 @@
 import { getSearchResults } from '@/hooks/search.actions';
 
 import { StoreCard } from '@/components/Stores/StoreCard';
-import ProductCard from '../Products/ProductCard';
+import ProductCard from '@/components/Products/ProductCard';
 import { Product } from '@/hooks/useProducts';
 import { Store } from '@/hooks/useStores';
 
 export default async function SearchResults({
-    searchQuery,
+    searchParams,
 }: {
-    searchQuery: string;
-}) {
-    const { products, stores } = await getSearchResults(searchQuery);
+    searchParams: Promise<{ q: string }>
+    }) {
+    const query = (await searchParams).q;
+    const { products, stores } = await getSearchResults(query);
 
     return (
         <div className="space-y-8">
@@ -38,7 +39,7 @@ export default async function SearchResults({
 
             {products.length === 0 && stores.length === 0 && (
                 <div className="text-center py-12">
-                    <p className="text-gray-500">No results found for &quot;{searchQuery}&quot;</p>
+                    <p className="text-gray-500">No results found for &quot;{query}&quot;</p>
                 </div>
             )}
         </div>
