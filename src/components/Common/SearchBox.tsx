@@ -1,20 +1,22 @@
 "use client"
 
-import { useState} from "react";
+import { useState } from "react";
 import { MapPin, Search } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { search } from "@/hooks/useSearch";
 import { useDebounce } from "@/hooks/useDebounce";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { Product } from "@/hooks/useProducts";
 import { Store } from "@/hooks/useStores";
-import Link from "next/link";
 
 const SearchBox = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [isFocused, setIsFocused] = useState(false);
     const debouncedSearchQuery = useDebounce(searchQuery, 500);
+    const router = useRouter();
 
-    const { data, isLoading, isError, refetch } = useQuery({
+    const { data, isLoading, isError } = useQuery({
         queryKey: ['search', debouncedSearchQuery],
         queryFn: () => search(debouncedSearchQuery),
         enabled: debouncedSearchQuery.length > 0,
@@ -24,7 +26,7 @@ const SearchBox = () => {
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
         if (searchQuery.trim()) {
-            refetch();
+            router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
         }
     };
 
@@ -48,7 +50,7 @@ const SearchBox = () => {
                 </button>
             </form>
 
-            {/* Search results dropdown */}
+            {/* Typeahead dropdown - shows preview of results */}
             {isFocused && debouncedSearchQuery && (
                 <div className="absolute z-10 mt-2 w-full bg-white rounded-lg shadow-lg border border-gray-200 max-h-96 overflow-y-auto">
                     {isLoading ? (
@@ -59,8 +61,13 @@ const SearchBox = () => {
                         <>
                             {data.products?.length > 0 && (
                                 <div className="border-b border-gray-200">
-                                    {/* <h3 className="px-4 py-2 font-semibold text-gray-700 bg-gray-50">Products</h3> */}
-                                    {data.products.map((product: Product) => (
+                                            <Link
+                                                href={`/search?q=${encodeURIComponent(debouncedSearchQuery)}&type=products`}
+                                                className="block px-4 py-2 font-semibold text-gray-700 bg-gray-50 hover:bg-gray-100"
+                                            >
+                                                View all {data.products.length} products
+                                            </Link>
+                                            {data.products.slice(0, 3).map((product: Product) => (
                                         <Link
                                             key={product._id}
                                             href={`/products/${product._id}`}
@@ -78,12 +85,17 @@ const SearchBox = () => {
                             )}
                             {data.stores?.length > 0 && (
                                 <div>
-                                    {/* <h3 className="px-4 py-2 font-semibold text-gray-700 bg-gray-50">Stores</h3> */}
-                                    {data.stores.map((store: Store) => (
+                                            <Link
+                                                href={`/search?q=${encodeURIComponent(debouncedSearchQuery)}&type=stores`}
+                                                className="block px-4 py-2 font-semibold text-gray-700 bg-gray-50 hover:bg-gray-100"
+                                            >
+                                                View all {data.stores.length} stores
+                                            </Link>
+                                            {data.stores.slice(0, 3).map((store: Store) => (
                                         <Link
                                             key={store._id}
                                             href={`/stores/${store._id}`}
-                                            className="block px-4 py-2"
+                                                    className="block px-4 py-2 hover:bg-gray-100 transition-colors"
                                         >
                                             <div className="flex flex-row justify-between items-center">
                                                 <span className="text-sm text-gray-500">{store.name}</span>
@@ -99,6 +111,14 @@ const SearchBox = () => {
                             {data.products?.length === 0 && data.stores?.length === 0 && (
                                 <div className="p-4 text-center text-gray-500">No results found</div>
                             )}
+                                    <div className="p-2 border-t border-gray-200">
+                                        <Link
+                                            href={`/search?q=${encodeURIComponent(debouncedSearchQuery)}`}
+                                            className="block w-full text-center py-2 bg-primary text-white rounded hover:bg-red-700"
+                                        >
+                                            See all results
+                                        </Link>
+                                    </div>
                         </>
                     ) : null}
                 </div>
