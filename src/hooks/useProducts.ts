@@ -11,6 +11,8 @@ export interface Product {
         name: string;
         location: string;
     };
+    description?: string;
+    image?: string;
     createdAt: string;
     updatedAt: string;
 }

@@ -18,7 +18,7 @@ const ProductCarousel = () => {
   }
 
   return (
-    <div className="w-full mx-auto p-4">
+    <div className="w-full mx-auto p-4 py-10">
       {/* Show All Products Link */}
       <div className="flex justify-between mb-4">
         <h2 className="text-2xl font-bold">Our recommendations</h2>
@@ -47,7 +47,7 @@ const ProductCarousel = () => {
               href={`/products/${product._id}`}
               className="bg-white rounded-md shadow-xl overflow-hidden flex flex-col hover:shadow-lg transition-shadow"
             >
-              <div className="h-[200px] relative">
+              <div className="h-[150px] w-[150px] relative self-center">
                 <Image
                   src="/images/paracetamol.png"
                   alt={product.name}
