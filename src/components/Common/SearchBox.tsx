@@ -31,7 +31,7 @@ const SearchBox = () => {
     };
 
     return (
-        <div className="relative w-full max-w-xl">
+        <div className="relative w-full max-w-3xl">
             <form onSubmit={handleSearch}>
                 <input
                     type="text"

@@ -41,15 +41,21 @@ const AllProduct = () => {
                         >
                             {/* Image Container */}
                             <div className="relative aspect-square bg-gray-100 overflow-hidden">
-                                <Image
-                                    src="/images/paracetamol.png"
-                                    alt={product.name}
-                                    fill
-                                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
-                                    quality={80}
-                                    priority={false}
-                                />
+                                {product.imageUrl ? (
+                                    <Image
+                                        src={product.imageUrl}
+                                        alt={product.name}
+                                        fill
+                                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+                                        quality={80}
+                                        priority={false}
+                                    />
+                                ) : (
+                                    <div className="w-full h-full flex items-center justify-center text-gray-400">
+                                        No Image Available
+                                    </div>
+                                )}
                             </div>
 
                             {/* Product Info */}

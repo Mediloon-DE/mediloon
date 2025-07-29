@@ -12,7 +12,7 @@ export interface Product {
         location: string;
     };
     description?: string;
-    image?: string;
+    imageUrl: string;
     createdAt: string;
     updatedAt: string;
 }

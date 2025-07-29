@@ -3,16 +3,14 @@
 import Link from "next/link";
 import { useState } from "react";
 import Logo from "../Common/Logo";
-import { navItems } from "@/utils/constants"
-import { ShoppingCart, UserRound } from "lucide-react";
+import { Search, ShoppingCart, UserRound } from "lucide-react";
 import SearchBox from "../Common/SearchBox";
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-
     return (
-        <nav className="bg-white shadow-sm">
+        <nav className="bg-white">
             <div className="max-w-full mx-auto px-4 sm:px-6">
                 <div className="flex justify-between h-16 items-center">
                     {/* Logo */}
@@ -23,24 +21,15 @@ export default function Navbar() {
                     </div>
 
                     {/* Search Box - Center */}
-                    <div className="hidden md:flex flex-1">
+                    <div className="hidden md:flex flex-[2] max-w-xl mx-4">
                         <SearchBox />
                     </div>
 
                     {/* Desktop-Navigation */}
-                    <div className="hidden md:flex items-center justify-end space-x-8 md:flex-1">
-                        {/* {
-                            navItems.map((item) => (
-                                <Link
-                                    key={item.name}
-                                    href={item.href}
-                                    className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-md font-medium"
-                                >
-                                    {item.name}
-                                </Link>
-                            ))
-                        } */}
-
+                    <div className="flex items-center justify-end space-x-8 md:flex-1">
+                        <button className="flex md:hidden text-gray-700 hover:text-primary">
+                            <Search className="w-8 h-8" />
+                        </button>
                         {/* user-Icon */}
                         <button className="relative text-gray-700 hover:text-primary">
                             <UserRound className="w-8 h-8" />
@@ -58,7 +47,7 @@ export default function Navbar() {
                     <div className="md:hidden flex items-center">
                         <button
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
-                            className="text-gray-700 hover:text-blue-600 focus:outline-none"
+                            className="text-gray-700 hover:text-primary focus:outline-none"
                         >
                             <svg
                                 className="h-6 w-6"
@@ -89,22 +78,10 @@ export default function Navbar() {
 
             {/* Mobile-Navigation */}
             {isMenuOpen && (
-                <div className="md:hidden bg-white">
+                <div className="md:hidden bg-white border-t">
                     {/* Mobile Search Box - Only visible when menu is open */}
                     <div className="px-4 py-3">
                         <SearchBox />
-                    </div>
-
-                    <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                        {navItems.map((item) => (
-                            <Link
-                                key={item.name}
-                                href={item.href}
-                                className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium"
-                            >
-                                {item.name}
-                            </Link>
-                        ))}
                     </div>
                 </div>
             )}

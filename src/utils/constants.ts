@@ -1,14 +1,31 @@
 
 
-export const navItems = [
+export const topLinkItem = [
     {
-        name: "Produkte",
+        name: "Newsletter - 5€ voucher",
         href: "#"
     },
     {
-        name: "Geschäft",
+        name: "Online doctor",
         href: "#"
-    }
+    },
+    {
+        name: "Vouchers",
+        href: "#"
+    },
+    {
+        name: "Our Now! Service",
+        href: "#"
+    },
+    {
+        name: "Help & FAQ",
+        href: "#"
+    },
+    {
+        name: "About Us",
+        href: "#"
+    }   
+
 ]
 
    
