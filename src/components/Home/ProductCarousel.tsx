@@ -49,7 +49,7 @@ const ProductCarousel = () => {
             >
               <div className="h-[150px] w-[150px] relative self-center">
                 <Image
-                  src="/images/paracetamol.png"
+                  src={product.imageUrl || '/images/paracetamol.png'}
                   alt={product.name}
                   className="w-full h-full object-cover"
                   width={2500}

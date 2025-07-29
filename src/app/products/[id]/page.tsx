@@ -84,7 +84,7 @@ export default function ProductPage(props: {
                 <div className="space-y-0">
                     <div className="relative w-full pb-[60%] bg-gray-100 rounded-lg overflow-hidden">
                         <Image
-                            src="/images/paracetamol.png"
+                            src={product.imageUrl || '/images/paracetamol.png'}
                             alt={product.name}
                             fill
                             className="object-cover"

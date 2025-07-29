@@ -62,7 +62,7 @@ export function HeroCarousel() {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-center items-center h-full">
                                     <div className="relative w-[350px] h-64 md:h-80 rounded-xl overflow-hidden shadow-lg">
                                         <Image
-                                            src={product.image || '/images/paracetamol.png'}
+                                            src={product.imageUrl || '/images/paracetamol.png'}
                                             alt={product.name}
                                             fill
                                             className="object-cover"
