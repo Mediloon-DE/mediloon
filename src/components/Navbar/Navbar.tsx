@@ -26,7 +26,7 @@ export default function Navbar() {
                     </div>
 
                     {/* Desktop-Navigation */}
-                    <div className="flex items-center justify-end space-x-8 md:flex-1">
+                    <div className="flex items-center justify-end space-x-4 lg:space-x-8 md:flex-1">
                         <button className="flex md:hidden text-gray-700 hover:text-primary">
                             <Search className="w-8 h-8" />
                         </button>

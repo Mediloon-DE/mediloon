@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const ProductCarousel = () => {
   const { data: products, isLoading, error } = useAllProducts();
-  const productsToShow = 4; // Number of products to display
+  const productsToShow = 4;
 
   if (error) {
     return (
@@ -20,18 +20,18 @@ const ProductCarousel = () => {
   return (
     <div className="w-full mx-auto p-4 py-10">
       {/* Show All Products Link */}
-      <div className="flex justify-between mb-4">
-        <h2 className="text-2xl font-bold">Our recommendations</h2>
+      <div className="flex flex-row max-md:flex-wrap justify-between mb-4">
+        <h2 className="text-xl font-bold">Our recommendations</h2>
         <Link
           href="/products"
-          className="text-natural-900 hover:text-primary font-medium flex items-center"
+          className="text-natural-900 hover:text-primary font-bold text-sm flex items-center"
         >
-          Show all products <span className="text-primary ml-1 text-2xl">→</span>
+          Show all products<span className="text-primary ml-1 -mt-2 text-3xl">→</span>
         </Link>
       </div>
 
       {/* Products Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-10">
         {isLoading ? (
           [...Array(productsToShow)].map((_, i) => (
             <div key={i} className="flex flex-col">
@@ -55,8 +55,8 @@ const ProductCarousel = () => {
                   width={2500}
                   height={2500}
                   priority
-                  quality={85} // Optimize quality (default 75)
-                  sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 25vw" // Responsive sizing
+                  quality={85} 
+                  sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 25vw" 
                   style={{
                     objectFit: 'cover',
                     objectPosition: 'center'

@@ -1,29 +1,58 @@
-// import Link from "next/link";
-// import Logo from "../Common/Logo";
 
 
-const Footer = () => {
-  return (
-      <footer className="bg-gray-800 text-white py-8">
-          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-              {/* <div className="flex flex-col md:flex-row justify-between items-center">
-                  <div className="mb-4 md:mb-0">
-                      <Logo className={"text-gray-50 hover:text-gray-200"} />
-                      <p className="text-gray-400 mt-2">Qualitätsmedizinprodukte für Fachkräfte</p>
-                  </div>
-                  <div className="flex space-x-3 md:space-x-6">
-                      <Link href="#" className="hover:text-blue-400">Kontakt</Link>
-                      <Link href="#" className="hover:text-blue-400">Über Uns</Link>
-                      <Link href="#" className="hover:text-blue-400">Datenschutz</Link>
-                      <Link href="#" className="hover:text-blue-400">AGB</Link>
-                  </div>
-              </div> */}
-              <div className="mt-8 text-center text-gray-400 text-sm">
-                  &copy; {new Date().getFullYear()} Mediloon. Alle Rechte vorbehalten.
-              </div>
-          </div>
-      </footer>
-  )
-}
+import { FooterSection } from './FooterSection';
+import { NewsletterSection } from './NewsletterSection';
 
-export default Footer
+export const Footer: React.FC = () => {
+    const helpFaqLinks = [
+        { text: "FAQ", href: "/faq" },
+        { text: "Help", href: "/help" },
+        { text: "Shipment", href: "/shipment" },
+        { text: "Shipping costs", href: "/shipping-costs" },
+        { text: "Now! Shipping", href: "/now-shipping" },
+        { text: "E-prescription", href: "/e-prescription" },
+        { text: "Pharmacovigilance", href: "/pharmacovigilance" },
+        { text: "Medical device safety", href: "/medical-device-safety" },
+    ];
+
+    const companyLinks = [
+        { text: "About Us", href: "/about" },
+        { text: "Corporate Website", href: "/corporate" },
+        { text: "Retail Media", href: "/retail-media" },
+        { text: "Jobs & Careers", href: "/careers" },
+        { text: "Become a partner", href: "/partners" },
+        { text: "RedPoints", href: "/redpoints" },
+        { text: "Our apps", href: "/apps" },
+        { text: "Our own brands", href: "/brands" }
+    ];
+
+    const legalLinks = [
+        { text: "Use and liability", href: "legal/liability" },
+        { text: "Terms and Conditions", href: "legal/terms" },
+        { text: "Revocation", href: "legal/revocation" },
+        { text: "Data protection", href: "legal/privacy" },
+        { text: "Accessibility Statement", href: "legal/accessibility" },
+        { text: "Cookie settings", href: "legal/cookies" },
+        { text: "Imprint", href: "legal/imprint" }
+    ];
+
+    return (
+        <footer className="flex flex-col items-center bg-[#FFEADE] py-10">
+            <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div className="w-full flex flex-col md:flex-row">
+                    <div className="flex flex-col md:flex-row justify-between text-sm w-full">
+                        <FooterSection title="Help & FAQ" links={helpFaqLinks} />
+                        <FooterSection title="Pursue" links={companyLinks} />
+                        <FooterSection title="Legal" links={legalLinks} />
+                        <NewsletterSection />
+                    </div>
+                </div>
+                <div className="mt-8 text-start text-gray-900 text-sm">
+                    &copy; {new Date().getFullYear()} Mediloon. - Your TÜV-certified online pharmacy!.
+                </div>
+            </div>
+        </footer>
+    );
+};
+
+export default Footer;

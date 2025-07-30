@@ -3,6 +3,16 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@layer base {
+  :root {
+    --font-sans: "Helvetica Neue", "Nimbus Sans L", Arial, sans-serif;
+  }
+
+  body {
+    font-family: var(--font-sans);
+  }
+}
+
 /* :root {
   --background: #ffffff;
   --foreground: #171717;

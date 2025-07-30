@@ -10,7 +10,7 @@ const Topbar = () => {
     const { data: stores, isLoading: storesLoading, error: storesError } = useStores();
 
     return (
-        <div className="flex flex-col w-full items-center my-5 ">
+        <div className="flex flex-col w-full items-center my-5 bg-[#FDD1BC] ">
             <div className="w-full rounded-sm p-2 flex justify-start items-center gap-2">
 
                 {/* Menu Icon and Dropdown */}
