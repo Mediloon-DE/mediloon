@@ -7,9 +7,9 @@ interface BenefitItem {
 
 export const NewsletterSection: React.FC = () => {
     const benefits: BenefitItem[] = [
-        { text: "Attractive offers and discounts" },
-        { text: "Exclusive vouchers and gifts" },
-        { text: "Free extras" },
+        { text: "Attraktive Angebote und Rabatt" },
+        { text: "Exklusive Gutscheine und Geschenke" },
+        { text: "Gratis-Zugaben" },
     ];
 
     return (
@@ -33,11 +33,11 @@ export const NewsletterSection: React.FC = () => {
                         <span>5€</span>
                     </div>
                 </div>
-                <button className="flex flex-col justify-center items-center px-16 py-2 mt-6 text-sm font-bold tracking-normal text-center text-white whitespace-nowrap bg-primary rounded-full max-md:px-5 hover:bg-rose-700 transition-colors">
-                    <div className="flex gap-1.5 w-[94px]">
-                        <Mail className='w-8 h-8' />
-                        <span className="my-auto">Register</span>
-                    </div>
+                <button className=" flex flex-row justify-center items-center w-full py-2 gap-1.5 mt-6 text-sm font-bold text-center text-white bg-primary rounded-full max-md:px-5 hover:bg-rose-700 transition-colors">
+
+                    <Mail className='' />
+                    <span className="my-auto">Anmelden</span>
+
                 </button>
             </div>
         </section>

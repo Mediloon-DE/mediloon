@@ -1,14 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Product } from "@/hooks/useProducts";
 
-interface Product {
-    _id: string;
-    name: string;
-    price: number;
-    quantity: number;
-    image?: string;
-    category?: string;
-}
+
 
 export default function ProductCard({ product }: { product: Product }) {
     return (
@@ -18,9 +12,9 @@ export default function ProductCard({ product }: { product: Product }) {
         >
             {/* Image Container */}
             <div className="relative aspect-square bg-gray-100 overflow-hidden">
-                {product.image ? (
+                {product.imageUrl ? (
                     <Image
-                        src={product.image}
+                        src={product.imageUrl}
                         alt={product.name}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -62,11 +56,11 @@ export default function ProductCard({ product }: { product: Product }) {
                     )}
                 </div>
 
-                {product.category && (
+                {/* {product.category && (
                     <span className="mt-2 text-xs text-gray-500">
                         {product.category}
                     </span>
-                )}
+                )} */}
             </div>
         </Link>
     );

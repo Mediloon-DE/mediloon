@@ -18,7 +18,7 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ title, links }) =>
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <nav className="flex flex-col items-start w-full md:w-auto">
+        <nav className="flex flex-col items-start mt-5 w-full md:w-auto">
             <button
                 className="flex items-center justify-between w-full md:w-auto font-bold text-zinc-900 md:pointer-events-none"
                 onClick={() => setIsOpen(!isOpen)}

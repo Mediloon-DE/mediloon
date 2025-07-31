@@ -6,8 +6,8 @@ interface LogoProps {
 
 const Logo: React.FC<LogoProps> = ({ className }) => {
   return (
-    <h1 className={`text-2xl font-extrabold  tracking-wide transition-colors cursor-pointer ${className || ''}`}>
-      Medillon
+    <h1 className={`text-xl md:text-2xl font-extrabold  tracking-wide transition-colors cursor-pointer ${className || ''}`}>
+      Mediloon
     </h1>
   )
 }

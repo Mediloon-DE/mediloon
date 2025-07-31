@@ -5,6 +5,7 @@ export interface IProdect extends Document {
     name: string;
     price: number;
     quantity: number;
+    imageUrl: string;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -24,11 +25,18 @@ const productSchema = new Schema<IProdect>(
         price: {
             type: Number,
             required: true,
+            min: 0,
         },
         quantity: {
             type: Number,
             required: true,
-        }
+            min: 0,
+        },
+        imageUrl: {
+            type: String,
+            required: true,
+            unique: true,
+        },
     },
     {
         timestamps: true

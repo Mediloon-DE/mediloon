@@ -59,8 +59,8 @@ export function HeroCarousel() {
                     {products && products.length > 0 &&
                         products?.slice(0, productsToShow).map((product: Product) => (
                             <CarouselItem key={product._id}>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-center items-center h-full">
-                                    <div className="relative w-[350px] h-64 md:h-80 rounded-xl overflow-hidden shadow-lg">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 justify-center items-center h-full">
+                                    <div className="relative w-[250px] md:w-[350px] h-50 md:h-80 rounded-xl overflow-hidden shadow-lg">
                                         <Image
                                             src={product.imageUrl || '/images/paracetamol.png'}
                                             alt={product.name}
@@ -69,7 +69,7 @@ export function HeroCarousel() {
                                             priority
                                             sizes="(max-width: 768px) 100vw, 50vw"
                                         />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                                        {/* <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" /> */}
                                     </div>
 
                                     <div className="flex flex-col h-full px-4 md:px-0 gap-5">
@@ -90,7 +90,7 @@ export function HeroCarousel() {
                                                 className="bg-primary hover:bg-red-700 w-40 rounded-full"
                                             >
                                                 <Link href={`/products/${product._id}`}>
-                                                    Shop Now
+                                                    Jetzt entdecken
                                                 </Link>
                                             </Button>
                                         </div>

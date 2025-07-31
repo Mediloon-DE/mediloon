@@ -21,12 +21,12 @@ const ProductCarousel = () => {
     <div className="w-full mx-auto p-4 py-10">
       {/* Show All Products Link */}
       <div className="flex flex-row max-md:flex-wrap justify-between mb-4">
-        <h2 className="text-xl font-bold">Our recommendations</h2>
+        <h2 className="text-xl font-bold">Unsere Empfehlungen</h2>
         <Link
           href="/products"
           className="text-natural-900 hover:text-primary font-bold text-sm flex items-center"
         >
-          Show all products<span className="text-primary ml-1 -mt-2 text-3xl">→</span>
+          Alle Produkte anzeigen<span className="text-primary ml-1 -mt-2 text-3xl">→</span>
         </Link>
       </div>
 

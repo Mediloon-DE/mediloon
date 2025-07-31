@@ -2,27 +2,27 @@
 
 export const topLinkItem = [
     {
-        name: "Newsletter - 5€ voucher",
+        name: "Newsletter - 5€ Gutschein",
         href: "#"
     },
     {
-        name: "Online doctor",
+        name: "Online-Arzt",
         href: "#"
     },
     {
-        name: "Vouchers",
+        name: "Gutscheine",
         href: "#"
     },
     {
-        name: "Our Now! Service",
+        name: "Unser Now! Service",
         href: "#"
     },
     {
-        name: "Help & FAQ",
+        name: "Hilfe & FAQ",
         href: "#"
     },
     {
-        name: "About Us",
+        name: "Über uns",
         href: "#"
     }   
 

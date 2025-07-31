@@ -10,7 +10,7 @@ const Topbar = () => {
     const { data: stores, isLoading: storesLoading, error: storesError } = useStores();
 
     return (
-        <div className="flex flex-col w-full items-center my-5 bg-[#FDD1BC] ">
+        <div className="hidden md:flex flex-col w-full items-center my-5 bg-[#FDD1BC] ">
             <div className="w-full rounded-sm p-2 flex justify-start items-center gap-2">
 
                 {/* Menu Icon and Dropdown */}
@@ -23,7 +23,7 @@ const Topbar = () => {
                     >
                         <div className='flex flex-row my-auto gap-2 text-gray-700 hover:text-primary'>
                             <AlignJustify className="h-6 w-6" />
-                            <p className='text-base font-bold '>Categories</p>
+                            <p className='text-base font-bold '>Kategorien</p>
                         </div>
                     </button>
 
@@ -37,7 +37,7 @@ const Topbar = () => {
                             <div className="py-1 flex flex-row">
                                 {/* Stores Section */}
                                 <div className='flex flex-col'>
-                                    <div className="px-4 py-2 font-semibold border-b">Stores</div>
+                                    <div className="px-4 py-2 font-semibold border-b">Sanitätshaus</div>
                                     <div className="flex flex-col">
                                         {storesLoading ? (
                                             Array(3).fill(0).map((_, i) => (
@@ -57,7 +57,7 @@ const Topbar = () => {
                                                     className="flex px-4 py-2 text-gray-700 hover:bg-amber-50 transition-colors"
                                                     onClick={() => setIsMenuOpen(false)}
                                                 >
-                                                    <h3 className="text-base font-bold">{store?.name}</h3>
+                                                    <h3 className="text-base">{store?.name}</h3>
                                                     {/* <div className="flex items-center gap-1 text-gray-600 pl-2">
                                                         <MapPin className="h-4 w-4" />
                                                         <p className="text-gray-600 ">{store?.location}</p>
@@ -99,8 +99,8 @@ const Topbar = () => {
                 </div>
                 <div>|</div>
                 <div className="flex flex-row gap-8 pl-5 text-gray-700 ">
-                    <Link href="/products" className="text-base font-bold hover:text-primary">drug</Link>
-                    <Link href="/stores" className="text-base font-bold hover:text-primary">Medical supply store</Link>
+                    <Link href="/products" className="text-base font-bold hover:text-primary">Arzneimittel</Link>
+                    <Link href="/stores" className="text-base font-bold hover:text-primary">Sanitätshaus</Link>
                 </div>
             </div>
         </div>
