@@ -1,14 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Product } from "@/hooks/useProducts";
-import { useEffect } from "react";
-
 
 
 export default function ProductCard({ product }: { product: Product }) {
-    useEffect(() => {
-        console.log(product);
-    }, [product]);
+
     if (!product) {
         return (
             <div className="flex items-center justify-center h-64 bg-red-50 rounded-lg">
