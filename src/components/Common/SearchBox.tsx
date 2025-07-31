@@ -35,7 +35,7 @@ const SearchBox = () => {
             <form onSubmit={handleSearch}>
                 <input
                     type="text"
-                    placeholder="Search products or stores..."
+                    placeholder="Finden Sie Ihr Produkt"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onFocus={() => setIsFocused(true)}
