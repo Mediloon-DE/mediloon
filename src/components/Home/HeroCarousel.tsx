@@ -12,13 +12,29 @@ import {
 } from "@/components/ui/carousel"
 import { Product, useAllProducts } from "@/hooks/useProducts"
 import { Skeleton } from "@/components/ui/skeleton"
+import { type CarouselApi } from "@/components/ui/carousel"
 
 export function HeroCarousel() {
     const plugin = React.useRef(
-        Autoplay({ delay: 5000, stopOnInteraction: true })
+        Autoplay({ delay: 3000, stopOnInteraction: true })
     )
     const { data: products, isLoading, error } = useAllProducts();
-    const productsToShow = 4;
+    const productsToShow = 3;
+    const [api, setApi] = React.useState<CarouselApi>()
+    const [current, setCurrent] = React.useState(0)
+
+    React.useEffect(() => {
+        if (!api) {
+            return
+        }
+
+        // setCount(api.scrollSnapList().length)
+        setCurrent(api.selectedScrollSnap() + 0)
+
+        api.on("select", () => {
+            setCurrent(api.selectedScrollSnap() + 0)
+        })
+    }, [api])
 
     if (error) {
         return (
@@ -50,6 +66,7 @@ export function HeroCarousel() {
     return (
         <section className="w-full max-w-5xl mx-auto p-4 md:p-8">
             <Carousel
+                setApi={setApi}
                 plugins={[plugin.current]}
                 className="w-full mx-auto"
                 onMouseEnter={plugin.current.stop}
@@ -69,7 +86,6 @@ export function HeroCarousel() {
                                             priority
                                             sizes="(max-width: 768px) 100vw, 50vw"
                                         />
-                                        {/* <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" /> */}
                                     </div>
 
                                     <div className="flex flex-col h-full px-4 md:px-0 gap-5">
@@ -80,7 +96,6 @@ export function HeroCarousel() {
                                             <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
                                                 {product.name}
                                             </h1>
-
                                         </div>
 
                                         <div className="w-full flex justify-end">
@@ -99,8 +114,19 @@ export function HeroCarousel() {
                             </CarouselItem>
                         ))
                     }
-
                 </CarouselContent>
+
+                {/* Dots navigation */}
+                <div className="flex justify-center gap-2 mt-4">
+                    {products.slice(0, productsToShow).map((_, index) => (
+                        <button
+                            key={index}
+                            onClick={() => api?.scrollTo(index)}
+                            className={`w-2 h-2 rounded-full transition-all ${current === index ? 'bg-primary/60 w-4' : 'bg-gray-400'}`}
+                            aria-label={`Go to slide ${index + 1}`}
+                        />
+                    ))}
+                </div>
             </Carousel>
         </section>
     )

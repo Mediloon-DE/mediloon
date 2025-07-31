@@ -1,10 +1,21 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Product } from "@/hooks/useProducts";
+import { useEffect } from "react";
 
 
 
 export default function ProductCard({ product }: { product: Product }) {
+    useEffect(() => {
+        console.log(product);
+    }, [product]);
+    if (!product) {
+        return (
+            <div className="flex items-center justify-center h-64 bg-red-50 rounded-lg">
+                <p className="text-red-500">Failed to load product. Please try again later.</p>
+            </div>
+        );
+    }
     return (
         <Link
             href={`/products/${product._id}`}
@@ -23,15 +34,9 @@ export default function ProductCard({ product }: { product: Product }) {
                         priority={false}
                     />
                 ) : (
-                    <Image
-                        src="/images/paracetamol.png"
-                        alt={product.name}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
-                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
-                        quality={80}
-                        priority={false}
-                    />
+                    <div className="w-full h-full flex items-center justify-center text-gray-400">
+                        No Image Available
+                    </div>
                 )}
             </div>
 

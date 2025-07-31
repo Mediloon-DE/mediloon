@@ -11,7 +11,6 @@ export async function GET(request: Request, productData: { params: Params }) {
         await connectToDB();
 
         const products = await Product.find({storeId})
-            .select('name price quantity')
             .populate('storeId', 'name location');
 
         return NextResponse.json({

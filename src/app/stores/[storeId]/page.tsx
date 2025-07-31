@@ -53,7 +53,7 @@ export default function StorePage(props: {
  
 
   return (
-    <div className="flex flex-col py-8 px-2">
+    <div className="flex flex-col py-10 px-2">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-primary">{store?.name}</h1>
         <div className="flex items-center gap-1 text-gray-600 mt-2">

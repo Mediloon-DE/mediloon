@@ -11,7 +11,7 @@ const AllStores = () => {
 
     if (isLoading) return (
         <div className="flex flex-col justify-center items-center py-8 px-5">
-            <h1 className="text-3xl font-bold mb-8">Our Stores</h1>
+            <h1 className="text-3xl font-bold mb-8">Sanitätshaus</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {Array.from({ length: 6 }).map((_, index) => (
                     <div key={index} className="bg-gray-200 border rounded-lg p-6">
@@ -27,7 +27,7 @@ const AllStores = () => {
 
     return (
         <div className="flex flex-col py-8 px-2">
-            <h1 className="text-3xl font-bold mb-8">Our Stores</h1>
+            <h1 className="text-3xl font-bold mb-8">Sanitätshaus</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {stores?.map(store => (
                     <Link
@@ -41,8 +41,8 @@ const AllStores = () => {
                             <p className="text-gray-600">{store.location}</p>
                         </div>
                         
-                        <div className="mt-4 text-blue-600 hover:underline">
-                            View Products →
+                        <div className="mt-4 text-primary hover:underline">
+                           Alle Produkte anzeigen →
                         </div>
                     </Link>
                 ))}
