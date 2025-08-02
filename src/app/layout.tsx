@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import { QueryProvider } from "@/providers/query-provider";
 import TopLink from "@/components/Navbar/TopLink";
+import Chatbot from "@/components/Common/Chatbot";
 
 export const metadata: Metadata = {
   title: "Mediloon online pharmacy Store",
@@ -24,7 +25,10 @@ export default function RootLayout({
             <div className="sticky top-0 z-50 bg-white shadow-sm">
               <Navbar />
             </div>
-            <main className="flex-1">{children}</main>
+            <main className="flex-1">
+              {children}
+              <Chatbot />
+            </main>
           </QueryProvider>
         </div>
         <Footer />
