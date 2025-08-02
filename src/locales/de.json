@@ -1,0 +1,20 @@
+{
+    "chatTitle": "MediLoon Chat-Support",
+    "welcomeMessage": "Hallo! Wie kann ich Ihnen heute helfen?",
+    "inputPlaceholder": "Geben Sie Ihre Nachricht ein...",
+    "suggestionsTitle": "Oder probieren Sie einen dieser Vorschläge:",
+    "suggestions": [
+        "Was sind die Nebenwirkungen von Aspirin Protect?",
+        "Wie wende ich Aspirin Complex Heißgetränk an?",
+        "Kann ich Aspirin mit anderen Medikamenten einnehmen?",
+        "Was ist der Unterschied zwischen Aspirin und Ibuprofen?",
+        "Erzählen Sie mir von einer herzgesunden Ernährung.",
+        "Was sind die Symptome einer Erkältung?",
+        "Wie kann ich Spannungskopfschmerzen lindern?",
+        "Tipps für besseren Schlaf.",
+        "Was ist Achtsamkeitsmeditation?",
+        "Erklären Sie die Vorteile von regelmäßigem Training.",
+        "Wann sollte ich bei Fieber zum Arzt gehen?",
+        "Wofür wird Aspirin Sinucomplex angewendet?"
+    ]
+}

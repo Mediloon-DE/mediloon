@@ -1,133 +1,168 @@
 "use client"
 
 import { ArrowRight, MessageCircleMore, X } from 'lucide-react';
-import { useState, useRef, useEffect } from 'react';
+import { useEffect, useState, } from 'react';
+import { useChat } from '@ai-sdk/react'
+import ChatMessages from './ChatMessages'
+
+import { LanguageToggle } from './LanguageToggle';
+import en from '@/locales/en.json';
+import de from '@/locales/de.json';
+
+const translations = { en, de };
+
 
 export default function Chatbot() {
     const [isOpen, setIsOpen] = useState(false);
-    const [messages, setMessages] = useState<Array<{ text: string; sender: 'user' | 'bot' }>>([
-        { text: "Hello! How can I help you today?", sender: 'bot' }
-    ]);
-    const [inputValue, setInputValue] = useState('');
-    const [isTyping, setIsTyping] = useState(false);
-    const messagesEndRef = useRef<HTMLDivElement>(null);
 
-    
-    useEffect(() => {
-        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }, [messages]);
+    const [language, setLanguage] = useState<'en' | 'de'>('de');
+    const [currentSuggestions, setCurrentSuggestions] = useState<string[]>([]);
 
-    const handleSendMessage = () => {
-        if (inputValue.trim() === '') return;
-
-        
-        const userMessage = { text: inputValue, sender: 'user' as const };
-        setMessages(prev => [...prev, userMessage]);
-        setInputValue('');
-        setIsTyping(true);
-
-        
-        setTimeout(() => {
-            
-            const botMessage = { text: '', sender: 'bot' as const };
-            setMessages(prev => [...prev, botMessage]);
-
-            const responseText = "Thanks for your message! I'm a demo bot.";
-
-            let i = 0;
-            const intervalId = setInterval(() => {
-                if (i < responseText.length) {
-                    setMessages(prev => {
-                        const newMessages = [...prev];
-                        newMessages[newMessages.length - 1] = {
-                            ...newMessages[newMessages.length - 1],
-                            text: responseText.substring(0, i + 1)
-                        };
-                        return newMessages;
-                    });
-                    i++;
-                } else {
-                    clearInterval(intervalId);
-                    setIsTyping(false);
-                }
-            }, 20);
-        }, 1000);
+    const t = (key: keyof typeof en): any => {
+        return translations[language][key] || key;
     };
+
+    const { messages, input, handleInputChange, handleSubmit, status, setMessages, append } = useChat({
+        api: '/api/chat',
+
+
+
+        body: {
+            language: language,
+        },
+        onFinish() {
+            handleSuggetions();
+        },
+
+        onError: (err) => {
+            console.error("Chat Error:", err);
+
+        },
+
+
+    })
+
+    const isLoading = status === 'submitted';
+
+    const isDisabled = status === 'streaming' || status === 'submitted';
+
+    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (input.trim()) {
+            handleSubmit(e);
+        }
+    };
+
+    const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            const fakeEvent = { preventDefault: () => { } } as React.FormEvent<HTMLFormElement>;
+            if (input.trim()) {
+                handleSubmit(fakeEvent);
+            }
+        }
+    }
+
+    const handleSuggetions = () => {
+
+        if (messages.length <= 1) {
+            const allSuggestions = t('suggestions');
+
+            const shuffled = [...allSuggestions].sort(() => 0.5 - Math.random());
+            setCurrentSuggestions(shuffled.slice(0, 4));
+        } else {
+            setCurrentSuggestions([]);
+        }
+    }
+
+    const handleSuggestionClick = (suggestion: string) => {
+        append({
+            role: 'user',
+            content: suggestion,
+        });
+    };
+
+
+    useEffect(() => {
+
+        if (isOpen) {
+            setMessages([{ id: 'initial-greet', role: 'assistant', content: t('welcomeMessage') }]);
+            handleSuggetions();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [language, isOpen]);
+
 
     return (
         <div className="fixed bottom-2 right-1 sm:bottom-6 sm:right-4 md:right-6 z-50 flex flex-col items-end gap-2">
             {isOpen && (
                 <div className="w-[calc(100vw-2rem)] sm:w-96 h-[calc(100vh-10rem)] max-h-[650px] bg-white rounded-lg shadow-xl flex flex-col border border-gray-200 overflow-hidden pb-2">
-                    {/* Header */}
+
                     <div className="bg-primary/90 text-white p-3 sm:p-4 flex justify-between items-center">
-                        <h3 className="font-semibold text-sm sm:text-base">Mediloon Chat Support</h3>
-                        <button
-                            onClick={() => setIsOpen(false)}
-                            className="text-white hover:text-gray-200"
-                        >
-                            <X />
-                        </button>
-                    </div>
-
-                    {/* Messages */}
-                    <div className="flex-1 p-2 sm:p-4 overflow-y-auto">
-                        <div className="space-y-2 sm:space-y-3">
-                            {messages.map((message, index) => (
-                                <div
-                                    key={index}
-                                    className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-                                >
-                                    <div
-                                        className={`max-w-[80%] sm:max-w-xs p-2 sm:p-3 rounded-lg text-sm sm:text-base ${message.sender === 'user'
-                                            ? 'bg-primary/90 text-white'
-                                            : 'bg-gray-100 text-gray-800'}`}
-                                    >
-                                        {message.text}
-                                        {index === messages.length - 1 && message.sender === 'bot' && isTyping && (
-                                            <span className="ml-1 inline-block h-2 w-2 animate-pulse rounded-full bg-gray-500 align-middle"></span>
-                                        )}
-                                    </div>
-                                </div>
-                            ))}
-                            <div ref={messagesEndRef} />
-                        </div>
-                    </div>
-
-                    {/* Input */}
-                    <div className="p-2 border-t border-gray-200">
-                        <div className="flex gap-2">
-                            <input
-                                type="text"
-                                value={inputValue}
-                                onChange={(e) => setInputValue(e.target.value)}
-                                onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                                placeholder="Type your message..."
-                                className="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-primary"
-                                disabled={isTyping}
-                            />
-                            <button
-                                onClick={handleSendMessage}
-                                className=""
-                                disabled={isTyping || inputValue.trim() === ''}
-                            >
-                                <ArrowRight className='text-sm sm:text-base text-primary' />
+                        <h3 className="font-semibold text-sm sm:text-base">{t('chatTitle')}</h3>
+                        <div className="flex items-center gap-2">
+                            <LanguageToggle language={language} setLanguage={setLanguage} />
+                            <button onClick={() => setIsOpen(false)} className="text-white hover:text-gray-200">
+                                <X />
                             </button>
                         </div>
+                    </div>
+
+
+                    <div className="flex-1 p-2 sm:p-4 overflow-y-auto">
+                        <ChatMessages messages={messages} isLoading={isLoading} />
+
+
+                        {messages.length <= 1 && !isLoading && (
+                            <div className="mt-4 animate-in fade-in duration-500">
+                                <p className="text-xs text-center text-gray-500 mb-2">{t('suggestionsTitle')}</p>
+                                <div className="grid grid-cols-2 gap-2">
+                                    {currentSuggestions.map((suggestion, i) => (
+                                        <button
+                                            key={i}
+                                            onClick={() => handleSuggestionClick(suggestion)}
+                                            className="text-left text-sm p-2 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
+                                        >
+                                            {suggestion}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+
+
+                    <div className="p-2 border-t border-gray-200">
+                        <form onSubmit={handleFormSubmit} className="flex gap-2">
+                            <input
+                                type="text"
+                                value={input}
+                                onChange={handleInputChange}
+                                onKeyDown={handleKeyPress}
+                                placeholder={t('inputPlaceholder')}
+                                className="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-primary"
+                                disabled={isDisabled}
+                            />
+                            <button
+                                type="submit"
+                                className="p-2 text-primary disabled:opacity-50"
+                                disabled={isDisabled || !input.trim()}
+                                aria-label="Send message"
+                            >
+                                <ArrowRight className='text-sm sm:text-base' />
+                            </button>
+                        </form>
                     </div>
                 </div>
             )}
 
-            {/* Toggle Button */}
+
             <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="bg-primary/90 text-white rounded-full p-3 sm:p-4 shadow-lg hover:bg-red-700 transition-colors"
                 aria-label={isOpen ? "Close chat" : "Open chat"}
             >
-                {isOpen ? (
-                    <X className="h-6 w-6 sm:h-8 sm:w-8" />
-                ) : (
-                    <MessageCircleMore className="h-6 w-6 sm:h-8 sm:w-8" />
-                )}
+                {isOpen ? <X className="h-6 w-6 sm:h-8 sm:w-8" /> : <MessageCircleMore className="h-6 w-6 sm:h-8 sm:w-8" />}
             </button>
         </div>
     );

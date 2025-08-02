@@ -1,0 +1,20 @@
+{
+    "chatTitle": "Mediloon Chat Support",
+    "welcomeMessage": "Hello! How can I help you today?",
+    "inputPlaceholder": "Type your message...",
+    "suggestionsTitle": "Or try one of these suggestions:",
+    "suggestions": [
+        "What are the side effects of Aspirin Protect?",
+        "How do I use Aspirin Complex hot drink?",
+        "Can I take Aspirin with other medications?",
+        "What's the difference between Aspirin and Ibuprofen?",
+        "Tell me about a heart-healthy diet.",
+        "What are the symptoms of a common cold?",
+        "How can I relieve a tension headache?",
+        "Tips for getting better sleep.",
+        "What is mindfulness meditation?",
+        "Explain the benefits of regular exercise.",
+        "When should I see a doctor for a fever?",
+        "What is Aspirin Sinucomplex used for?"
+    ]
+}
