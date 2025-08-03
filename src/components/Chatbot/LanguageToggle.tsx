@@ -16,9 +16,9 @@ interface LanguageToggleProps {
 
 export function LanguageToggle({ language, setLanguage }: LanguageToggleProps) {
     return (
-        <DropdownMenu>
+        <DropdownMenu modal={false}>
             <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="text-white hover:bg-white/20 focus-visible:ring-offset-0 focus-visible:ring-white">
+                <Button variant="ghost" size="sm" className="cursor-pointer hover:bg-white/20 focus-visible:ring-offset-0 focus-visible:ring-white">
                     <Languages className="h-5 w-5" />
                     <span className="ml-2 font-semibold uppercase">{language}</span>
                 </Button>

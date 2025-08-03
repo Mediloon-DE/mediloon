@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import { QueryProvider } from "@/providers/query-provider";
 import TopLink from "@/components/Navbar/TopLink";
-import Chatbot from "@/components/Common/Chatbot";
+import Chatbot from "@/components/Chatbot/Chatbot";
 
 export const metadata: Metadata = {
   title: "Mediloon online pharmacy Store",

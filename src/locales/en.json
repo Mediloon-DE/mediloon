@@ -1,5 +1,6 @@
 {
     "chatTitle": "Mediloon Chat Support",
+    "welcomeTitle": "Welcome to Mediloon",
     "welcomeMessage": "Hello! How can I help you today?",
     "inputPlaceholder": "Type your message...",
     "suggestionsTitle": "Or try one of these suggestions:",
