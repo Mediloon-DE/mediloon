@@ -17,7 +17,7 @@ export default async function SearchResults({
         <div className="space-y-8">
             {products.length > 0 && (
                 <section>
-                    <h2 className="text-xl font-semibold mb-4">Products ({products.length})</h2>
+                    <h2 className="text-xl font-semibold mb-4">Produkte ({products.length})</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         {products.map((product: Product) => (
                             <ProductCard key={product._id} product={product} />
@@ -28,7 +28,7 @@ export default async function SearchResults({
 
             {stores.length > 0 && (
                 <section>
-                    <h2 className="text-xl font-semibold mb-4">Stores ({stores.length})</h2>
+                    <h2 className="text-xl font-semibold mb-4">Geschäfte ({stores.length})</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         {stores.map((store: Store) => (
                             <StoreCard key={store._id} store={store} />
@@ -39,7 +39,7 @@ export default async function SearchResults({
 
             {products.length === 0 && stores.length === 0 && (
                 <div className="text-center py-12">
-                    <p className="text-gray-500">No results found for &quot;{query}&quot;</p>
+                    <p className="text-gray-500">Keine Ergebnisse gefunden für &quot;{query}&quot;</p>
                 </div>
             )}
         </div>

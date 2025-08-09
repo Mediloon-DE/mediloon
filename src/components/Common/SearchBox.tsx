@@ -54,9 +54,9 @@ const SearchBox = () => {
             {isFocused && debouncedSearchQuery && (
                 <div className="absolute z-10 mt-2 w-full bg-white rounded-lg shadow-lg border border-gray-200 max-h-96 overflow-y-auto">
                     {isLoading ? (
-                        <div className="p-4 text-center text-gray-500">Searching...</div>
+                        <div className="p-4 text-center text-gray-500">Suchen...</div>
                     ) : isError ? (
-                        <div className="p-4 text-center text-red-500">Error searching</div>
+                            <div className="p-4 text-center text-red-500">Fehler bei der Suche</div>
                     ) : data ? (
                         <>
                             {data.products?.length > 0 && (
@@ -65,7 +65,7 @@ const SearchBox = () => {
                                                 href={`/search?q=${encodeURIComponent(debouncedSearchQuery)}&type=products`}
                                                 className="block px-4 py-2 font-semibold text-gray-700 bg-gray-50 hover:bg-gray-100"
                                             >
-                                                View all {data.products.length} products
+                                                Alle {data.products.length} Produkte anzeigen 
                                             </Link>
                                             {data.products.slice(0, 3).map((product: Product) => (
                                         <Link
@@ -89,7 +89,7 @@ const SearchBox = () => {
                                                 href={`/search?q=${encodeURIComponent(debouncedSearchQuery)}&type=stores`}
                                                 className="block px-4 py-2 font-semibold text-gray-700 bg-gray-50 hover:bg-gray-100"
                                             >
-                                                View all {data.stores.length} stores
+                                                Alle {data.stores.length} Geschäfte anzeigen
                                             </Link>
                                             {data.stores.slice(0, 3).map((store: Store) => (
                                         <Link
@@ -109,14 +109,14 @@ const SearchBox = () => {
                                 </div>
                             )}
                             {data.products?.length === 0 && data.stores?.length === 0 && (
-                                <div className="p-4 text-center text-gray-500">No results found</div>
+                                        <div className="p-4 text-center text-gray-500">Keine Ergebnisse gefunden</div>
                             )}
                                     <div className="p-2 border-t border-gray-200">
                                         <Link
                                             href={`/search?q=${encodeURIComponent(debouncedSearchQuery)}`}
                                             className="block w-full text-center py-2 bg-primary text-white rounded hover:bg-red-700"
                                         >
-                                            See all results
+                                            Alle Ergebnisse anzeigen
                                         </Link>
                                     </div>
                         </>
