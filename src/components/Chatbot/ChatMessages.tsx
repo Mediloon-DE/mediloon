@@ -35,17 +35,17 @@ const ChatMessages = ({ messages, isLoading }: ChatMessagesProps) => {
         <div className="space-y-4">
             {messages.map((m, index) => (
                 <div key={m.id || `message-${index}`} className="flex items-end gap-2">
-                    {m.role === 'assistant' && (
+                    {/* {m.role === 'assistant' && (
                         <div className="flex h-8 w-8 shrink-0 select-none items-center justify-center rounded-md border bg-primary/10 text-primary">
                             <Bot className="h-5 w-5" />
                         </div>
-                    )}
+                    )} */}
 
                     <div
                         className={cn(
                             'max-w-[80%] rounded-lg p-3 text-sm shadow-sm',
                             m.role === 'user'
-                                ? 'ml-auto bg-primary text-primary-foreground'
+                                ? 'ml-auto bg-primary text-white'
                                 : 'bg-white text-gray-800 border'
                         )}
                     >
@@ -55,19 +55,19 @@ const ChatMessages = ({ messages, isLoading }: ChatMessagesProps) => {
                         </div>
                     </div>
 
-                    {m.role === 'user' && (
+                    {/* {m.role === 'user' && (
                         <div className="flex h-8 w-8 shrink-0 select-none items-center justify-center rounded-md border bg-gray-100 text-gray-600">
                             <User className="h-5 w-5" />
                         </div>
-                    )}
+                    )} */}
                 </div>
             ))}
 
             {isLoading && (
                 <div className="flex items-end gap-2">
-                    <div className="flex h-8 w-8 shrink-0 select-none items-center justify-center rounded-md border bg-primary/10 text-primary">
+                    {/* <div className="flex h-8 w-8 shrink-0 select-none items-center justify-center rounded-md border bg-primary/10 text-primary">
                         <Bot className="h-5 w-5" />
-                    </div>
+                    </div> */}
                     <TypingIndicator />
                 </div>
             )}
