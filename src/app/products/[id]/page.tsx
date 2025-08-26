@@ -141,7 +141,7 @@ export default function ProductPage(props: {
                             <span className="my-auto">In den Warenkorb</span>
 
                         </button>
-                        
+
                         {/* <Button
                             variant="outline"
                             className="px-6 py-3 border-primary text-primary hover:bg-primary hover:text-white cursor-pointer"
@@ -152,6 +152,24 @@ export default function ProductPage(props: {
                     </div>
                 </div>
             </div>
+            <div className="w-full flex justify-end items-end border-t border-b border-gray-300 mt-10 py-4">
+                <div className="space-y-2 text-lg">
+                    <div className="flex gap-2">
+                        <h2 className="font-semibold text-gray-900 min-w-[110px]">PZN:</h2>
+                        <p className="text-gray-600">
+                            {product.mmiProduct?.identity?.pzn || "-"}
+                        </p>
+                    </div>
+                    <div className="flex gap-2">
+                        <h2 className="font-semibold text-gray-900 min-w-[110px]">Hersteller:</h2>
+                        <p className="text-gray-600">
+                            {product.mmiProduct?.manufacturer?.name || "-"}
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
     );
 }

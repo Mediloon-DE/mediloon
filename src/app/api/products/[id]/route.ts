@@ -6,6 +6,7 @@ import { Store } from "@/types/store";
 const db = firebaseAdmin.firestore();
 const productsRef = db.collection("storeProducts");
 const storesRef = db.collection("stores");
+const mmiProductsRef = db.collection("products");
 
 type Params = Promise<{ id: string }>;
 
@@ -18,20 +19,22 @@ export async function GET(
     console.log("Product id", id);
 
     try {
-        // Fetch the product document
+        // 1️⃣ Fetch store product
         const productDoc = await productsRef.doc(id).get();
-
         if (!productDoc.exists) {
             return NextResponse.json(
                 { success: false, error: "Product not found" },
                 { status: 404 }
             );
         }
-
         const productData = productDoc.data() as Omit<Product, "id">;
 
-        // Fetch store (like mongoose populate)
-        let store: Pick<Store, "id" | "name" | "location" | "userId" | "name_lowercase" | "location_lowercase"> | null = null;
+        // 2️⃣ Fetch store (like mongoose populate)
+        let store: Pick<
+            Store,
+            "id" | "name" | "location" | "userId" | "name_lowercase" | "location_lowercase"
+        > | null = null;
+
         if (productData.storeId) {
             const storeDoc = await storesRef.doc(productData.storeId).get();
             if (storeDoc.exists) {
@@ -47,11 +50,24 @@ export async function GET(
             }
         }
 
-        // Merge product + store
-        const product: Product & { store?: typeof store } = {
+        // 3️⃣ Fetch related MMI product
+        let mmiProduct: any = null;
+        if (productData.mmiProductId) {
+            const mmiDoc = await mmiProductsRef.doc(String(productData.mmiProductId)).get();
+            if (mmiDoc.exists) {
+                mmiProduct = {
+                    id: mmiDoc.id,
+                    ...mmiDoc.data(),
+                };
+            }
+        }
+
+        // 4️⃣ Merge everything
+        const product: Product & { store?: typeof store; mmiProduct?: typeof mmiProduct } = {
             id: productDoc.id,
             ...productData,
             store,
+            mmiProduct,
         };
 
         return NextResponse.json({

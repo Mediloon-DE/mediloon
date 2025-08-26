@@ -1,3 +1,5 @@
+import { MMIProduct } from "./mmiProduct";
+
 export interface Product {
     id: string;
     storeId: string;
@@ -17,4 +19,5 @@ export interface Product {
         location_lowercase: string;
         userId: string;
     } | null;
+    mmiProduct?: MMIProduct | null;
 }

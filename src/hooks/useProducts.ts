@@ -34,6 +34,7 @@ export const useProducts = (storeId: string) => {
 
 export const fetchpProduct = async (id: string): Promise<Product> => {
     const response = await axios.get(`/products/${id}`);
+    // console.log(response.data.data);
     return response.data.data;
 };
 
