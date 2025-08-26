@@ -35,8 +35,8 @@ const AllProduct = () => {
                 ) : (
                     products?.map((product) => (
                         <Link
-                            key={product._id}
-                            href={`/products/${product._id}`}
+                            key={product.id}
+                            href={`/products/${product.id}`}
                             className="group border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-all duration-300 hover:border-primary flex flex-col h-[350px]"
                         >
                             {/* Image Container */}

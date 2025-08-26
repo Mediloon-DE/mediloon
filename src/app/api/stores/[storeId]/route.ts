@@ -1,29 +1,31 @@
 import { NextResponse } from "next/server";
-import Store from "@/models/store.model";
-import { connectToDB } from "@/lib/dbConnect";
+import firebaseAdmin from "@/lib/firebaseAdmin";
+import { Store } from "@/types/store";
 
-type Params = Promise<{ storeId: string }>
+type Params = Promise<{ storeId: string }>;
+
+const db = firebaseAdmin.firestore();
+const storesRef = db.collection("stores");
 
 export async function GET(request: Request, productData: { params: Params }) {
-    const params = await productData.params
-    const storeId = params.storeId
+    const params = await productData.params;
+    const storeId = params.storeId;
+
     try {
-        await connectToDB();        
+        const storeDoc = await storesRef.doc(storeId).get();
 
-        const store = await Store.findById(storeId)
-            .select('name location createdAt')
-            .lean();
-
-        if (!store) {
+        if (!storeDoc.exists) {
             return NextResponse.json(
                 { success: false, error: "Store not found" },
                 { status: 404 }
             );
         }
 
+        const store = { id: storeDoc.id, ...storeDoc.data() } as Store;
+
         return NextResponse.json({
             success: true,
-            data: store
+            data: store,
         });
     } catch (error) {
         console.error("Error fetching store:", error);

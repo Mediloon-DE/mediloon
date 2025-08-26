@@ -43,8 +43,8 @@ const ProductCarousel = () => {
         ) : (
           products?.slice(0, productsToShow).map((product) => (
             <Link
-              key={product._id}
-              href={`/products/${product._id}`}
+              key={product.id}
+              href={`/products/${product.id}`}
               className="bg-white rounded-md shadow-xl overflow-hidden flex flex-col hover:shadow-lg transition-shadow"
             >
               <div className="h-[150px] w-[150px] relative self-center">

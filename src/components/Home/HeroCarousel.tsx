@@ -10,9 +10,10 @@ import {
     CarouselContent,
     CarouselItem,
 } from "@/components/ui/carousel"
-import { Product, useAllProducts } from "@/hooks/useProducts"
+import { useAllProducts } from "@/hooks/useProducts"
 import { Skeleton } from "@/components/ui/skeleton"
 import { type CarouselApi } from "@/components/ui/carousel"
+import { Product } from "@/types/product"
 
 export function HeroCarousel() {
     const plugin = React.useRef(
@@ -75,7 +76,7 @@ export function HeroCarousel() {
                 <CarouselContent>
                     {products && products.length > 0 &&
                         products?.slice(0, productsToShow).map((product: Product) => (
-                            <CarouselItem key={product._id}>
+                            <CarouselItem key={product.id}>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 justify-center items-center h-full">
                                     <div className="relative w-[250px] md:w-[350px] h-50 md:h-80 rounded-xl overflow-hidden shadow-lg">
                                         <Image
@@ -90,7 +91,7 @@ export function HeroCarousel() {
 
                                     <div className="flex flex-col h-full px-4 md:px-0 gap-5">
                                         <p className="mt-3 md:mt-4 text-base md:text-lg text-gray-600 line-clamp-3 text-end">
-                                            {product.storeId.name}
+                                            {product.store.name}
                                         </p>
                                         <div className="flex-grow">
                                             <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
@@ -104,7 +105,7 @@ export function HeroCarousel() {
                                                 size="lg"
                                                 className="bg-primary hover:bg-red-700 w-40 rounded-full"
                                             >
-                                                <Link href={`/products/${product._id}`}>
+                                                <Link href={`/products/${product.id}`}>
                                                     Jetzt entdecken
                                                 </Link>
                                             </Button>

@@ -1,19 +1,30 @@
 import { NextResponse } from "next/server";
-import Store from "@/models/store.model";
-import { connectToDB } from "@/lib/dbConnect";
+import firebaseAdmin from "@/lib/firebaseAdmin";
+import { Store } from "@/types/store";
+
+const db = firebaseAdmin.firestore();
+const storesRef = db.collection("stores");
 
 export async function GET(request: Request) {
     try {
-        await connectToDB();
-
         const { searchParams } = new URL(request.url);
-        const page = parseInt(searchParams.get('page') || '1');
-        const limit = parseInt(searchParams.get('limit') || '10');
+        const page = parseInt(searchParams.get("page") || "1", 10);
+        const limit = parseInt(searchParams.get("limit") || "10", 10);
 
-        const stores = await Store.find()
-            .select('name location')
-            .skip((page - 1) * limit)
-            .limit(limit);
+        // Query Firestore
+        const snapshot = await storesRef
+            .orderBy("createdAt", "desc")
+            .offset((page - 1) * limit)
+            .limit(limit)
+            .get();
+
+        const stores: Store[] = snapshot.docs.map(
+            (doc) => ({ id: doc.id, ...doc.data() } as Store)
+        );
+
+        // Count total (Firestore has no built-in count without aggregation)
+        const totalSnap = await storesRef.count().get();
+        const total = totalSnap.data().count;
 
         return NextResponse.json({
             success: true,
@@ -21,8 +32,8 @@ export async function GET(request: Request) {
             pagination: {
                 page,
                 limit,
-                total: await Store.countDocuments()
-            }
+                total,
+            },
         });
     } catch (error) {
         console.error("Error fetching stores:", error);

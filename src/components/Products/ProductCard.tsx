@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Product } from "@/hooks/useProducts";
+import { Product } from "@/types/product";
 
 
 export default function ProductCard({ product }: { product: Product }) {
@@ -14,7 +14,7 @@ export default function ProductCard({ product }: { product: Product }) {
     }
     return (
         <Link
-            href={`/products/${product._id}`}
+            href={`/products/${product.id}`}
             className="group border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-all duration-300 hover:border-primary flex flex-col h-[350px]"
         >
             {/* Image Container */}

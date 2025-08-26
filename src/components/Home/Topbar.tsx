@@ -52,8 +52,8 @@ const Topbar = () => {
                                         ) : (
                                             stores?.map(store => (
                                                 <Link
-                                                    key={store._id}
-                                                    href={`/stores/${store._id}`}
+                                                    key={store.id}
+                                                    href={`/stores/${store.id}`}
                                                     className="flex px-4 py-2 text-gray-700 hover:bg-amber-50 transition-colors"
                                                     onClick={() => setIsMenuOpen(false)}
                                                 >
@@ -84,8 +84,8 @@ const Topbar = () => {
                                 ) : (
                                     doctors?.map(doctor => (
                                         <Link
-                                            key={doctor._id}
-                                            href={`/doctors/${doctor._id}`}
+                                            key={doctor.id}
+                                            href={`/doctors/${doctor.id}`}
                                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-amber-50 transition-colors"
                                             onClick={() => setIsMenuOpen(false)}
                                         >

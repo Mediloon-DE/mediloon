@@ -1,31 +1,50 @@
 'use server';
 
-import { connectToDB } from '@/lib/dbConnect';
-import Product from '@/models/product.model';
-import Store from '@/models/store.model';
+import firebaseAdmin from '@/lib/firebaseAdmin';
+import { Product } from '@/types/product';
+import { Store } from '@/types/store';
 
-export async function getSearchResults(query: string) {
-    await connectToDB();
+const db = firebaseAdmin.firestore();
+const productsRef = db.collection('storeProducts');
+const storesRef = db.collection('stores');
 
+export async function getSearchResults(query: string): Promise<{
+    products: (Product & { id: string })[];
+    stores: (Store & { id: string })[];
+}> {
     try {
-        const [products, stores] = await Promise.all([
-            Product.find({
-                $or: [
-                    { name: { $regex: query, $options: 'i' } },
-                ]
-            }),
-            Store.find({
-                $or: [
-                    { name: { $regex: query, $options: 'i' } },
-                    { location: { $regex: query, $options: 'i' } }
-                ]
-            })
+        const q = query.toLowerCase();
+
+        // Products search (case-insensitive)
+        const productsSnap = await productsRef
+            .orderBy('name_lowercase')
+            .startAt(q)
+            .endAt(q + '\uf8ff')
+            .get();
+
+        const products: (Product & { id: string })[] = productsSnap.docs.map((doc) => ({
+            ...(doc.data() as Product),
+            id: doc.id,
+        }));
+
+        // Stores search (case-insensitive by name or location)
+        const [storeNameSnap, storeLocationSnap] = await Promise.all([
+            storesRef.orderBy('name_lowercase').startAt(q).endAt(q + '\uf8ff').get(),
+            storesRef.orderBy('location_lowercase').startAt(q).endAt(q + '\uf8ff').get(),
         ]);
 
-        return {
-            products: JSON.parse(JSON.stringify(products)),
-            stores: JSON.parse(JSON.stringify(stores))
-        };
+        const storeMap = new Map<string, Store & { id: string }>();
+
+        storeNameSnap.forEach((doc) =>
+            storeMap.set(doc.id, { ...(doc.data() as Store), id: doc.id })
+        );
+        storeLocationSnap.forEach((doc) =>
+            storeMap.set(doc.id, { ...(doc.data() as Store), id: doc.id })
+        );
+
+        const stores = Array.from(storeMap.values());
+
+        return { products, stores };
     } catch (error) {
         console.error('Search failed:', error);
         return { products: [], stores: [] };

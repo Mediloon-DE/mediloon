@@ -1,21 +1,7 @@
 import axios from "@/lib/axios";
+import { Product } from "@/types/product";
 import { useQuery } from "@tanstack/react-query";
 
-export interface Product {
-    _id: string;
-    name: string;
-    price: number;
-    quantity: number;
-    storeId: {
-        _id: string;
-        name: string;
-        location: string;
-    };
-    description?: string;
-    imageUrl: string;
-    createdAt: string;
-    updatedAt: string;
-}
 
 // Fetch all products
 export const fetchAllProducts = async (): Promise<Product[]> => {

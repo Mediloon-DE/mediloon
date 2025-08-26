@@ -2,8 +2,9 @@ import { getSearchResults } from '@/hooks/search.actions';
 
 import { StoreCard } from '@/components/Stores/StoreCard';
 import ProductCard from '@/components/Products/ProductCard';
-import { Product } from '@/hooks/useProducts';
-import { Store } from '@/hooks/useStores';
+import { Product } from '@/types/product';
+import { Store } from '@/types/store';
+
 
 export default async function SearchResults({
     searchParams,
@@ -20,7 +21,7 @@ export default async function SearchResults({
                     <h2 className="text-xl font-semibold mb-4">Produkte ({products.length})</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         {products.map((product: Product) => (
-                            <ProductCard key={product._id} product={product} />
+                            <ProductCard key={product.id} product={product} />
                         ))}
                     </div>
                 </section>
@@ -31,7 +32,7 @@ export default async function SearchResults({
                     <h2 className="text-xl font-semibold mb-4">Geschäfte ({stores.length})</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         {stores.map((store: Store) => (
-                            <StoreCard key={store._id} store={store} />
+                            <StoreCard key={store.id} store={store} />
                         ))}
                     </div>
                 </section>

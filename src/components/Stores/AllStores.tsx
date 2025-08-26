@@ -31,8 +31,8 @@ const AllStores = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {stores?.map(store => (
                     <Link
-                        key={store._id}
-                        href={`/stores/${store._id}`}
+                        key={store.id}
+                        href={`/stores/${store.id}`}
                         className="border rounded-lg p-6 hover:shadow-md transition-shadow"
                     >
                         <h2 className="text-xl font-semibold">{store.name}</h2>

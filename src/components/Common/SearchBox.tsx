@@ -7,8 +7,9 @@ import { search } from "@/hooks/useSearch";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Product } from "@/hooks/useProducts";
-import { Store } from "@/hooks/useStores";
+import { Product } from "@/types/product";
+import { Store } from "@/types/store";
+
 
 const SearchBox = () => {
     const [searchQuery, setSearchQuery] = useState("");
@@ -69,8 +70,8 @@ const SearchBox = () => {
                                             </Link>
                                             {data.products.slice(0, 3).map((product: Product) => (
                                         <Link
-                                            key={product._id}
-                                            href={`/products/${product._id}`}
+                                            key={product.id}
+                                            href={`/products/${product.id}`}
                                             className="block px-4 py-2 hover:bg-gray-100 transition-colors"
                                         >
                                             <div className="flex flex-row justify-between items-center">
@@ -93,8 +94,8 @@ const SearchBox = () => {
                                             </Link>
                                             {data.stores.slice(0, 3).map((store: Store) => (
                                         <Link
-                                            key={store._id}
-                                            href={`/stores/${store._id}`}
+                                            key={store.id}
+                                            href={`/stores/${store.id}`}
                                                     className="block px-4 py-2 hover:bg-gray-100 transition-colors"
                                         >
                                             <div className="flex flex-row justify-between items-center">

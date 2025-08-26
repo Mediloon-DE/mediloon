@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { MapPin } from "lucide-react";
-import { Store } from "@/hooks/useStores";
+import { Store } from "@/types/store";
+
 
 interface StoreCardProps {
     store: Store;
@@ -11,7 +12,7 @@ interface StoreCardProps {
 export const StoreCard = ({ store }: StoreCardProps) => {
     return (
         <Link
-            href={`/stores/${store._id}`}
+            href={`/stores/${store.id}`}
             className="group block overflow-hidden rounded-lg border border-gray-200 hover:shadow-md transition-shadow duration-200"
         >
             <div className="relative h-48 bg-gray-100">

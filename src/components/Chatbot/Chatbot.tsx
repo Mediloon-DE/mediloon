@@ -216,6 +216,7 @@ export default function Chatbot() {
                                     fill
                                     sizes="(max-width: 640px) 48px, (max-width: 768px) 56px, (max-width: 1024px) 64px, 70px"
                                     priority
+                                        unoptimized
                                 />
                             </div>
                         )}

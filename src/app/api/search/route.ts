@@ -1,63 +1,76 @@
-import { NextResponse } from 'next/server';
-import Product from '@/models/product.model';
-import Store from '@/models/store.model';
-import { connectToDB } from '@/lib/dbConnect';
+import { NextResponse } from "next/server";
+import firebaseAdmin from "@/lib/firebaseAdmin";
+import { Product } from "@/types/product";
+import { Store } from "@/types/store";
+
+const db = firebaseAdmin.firestore();
+const productsRef = db.collection("storeProducts");
+const storesRef = db.collection("stores");
 
 export async function GET(request: Request) {
-    await connectToDB();
-
     const { searchParams } = new URL(request.url);
-    const query = searchParams.get('q') || '';
-    const type = searchParams.get('type'); // 'products' or 'stores'
-    const page = parseInt(searchParams.get('page') || '1');
-    const limit = parseInt(searchParams.get('limit') || '10');
+    const query = searchParams.get("q") || "";
+    const type = searchParams.get("type"); // 'products' or 'stores'
+    const page = parseInt(searchParams.get("page") || "1");
+    const limit = parseInt(searchParams.get("limit") || "10");
 
     try {
-        if (type === 'products') {
-            const products = await Product.find({
-                $or: [
-                    { name: { $regex: query, $options: 'i' } },
-                ]
-            })
-                .skip((page - 1) * limit)
-                .limit(limit);
+        const start = query;
+        const end = query + "\uf8ff";
+
+        if (type === "products") {
+            const productsSnap = await productsRef
+                .orderBy("name")
+                .startAt(start)
+                .endAt(end)
+                .offset((page - 1) * limit)
+                .limit(limit)
+                .get();
+
+            const products: Product[] = productsSnap.docs.map((doc) => ({
+                id: doc.id,
+                ...(doc.data() as Omit<Product, "id">),
+            }));
 
             return NextResponse.json({ products });
-        } else if (type === 'stores') {
-            const stores = await Store.find({
-                $or: [
-                    { name: { $regex: query, $options: 'i' } },
-                    { location: { $regex: query, $options: 'i' } }
-                ]
-            })
-                .skip((page - 1) * limit)
-                .limit(limit);
+        } else if (type === "stores") {
+            const storesSnap = await storesRef
+                .orderBy("name")
+                .startAt(start)
+                .endAt(end)
+                .offset((page - 1) * limit)
+                .limit(limit)
+                .get();
+
+            const stores: Store[] = storesSnap.docs.map((doc) => ({
+                id: doc.id,
+                ...(doc.data() as Omit<Store, "id">),
+            }));
 
             return NextResponse.json({ stores });
         } else {
             // Return both with limited results for typeahead
-            const [products, stores] = await Promise.all([
-                Product.find({
-                    $or: [
-                        { name: { $regex: query, $options: 'i' } },
-                    ]
-                }).limit(3),
-                Store.find({
-                    $or: [
-                        { name: { $regex: query, $options: 'i' } },
-                        { location: { $regex: query, $options: 'i' } }
-                    ]
-                }).limit(3)
+            const [productsSnap, storesSnap] = await Promise.all([
+                productsRef.orderBy("name").startAt(start).endAt(end).limit(3).get(),
+                storesRef.orderBy("name").startAt(start).endAt(end).limit(3).get(),
             ]);
 
-            return NextResponse.json({
-                products,
-                stores
-            });
+            const products: Product[] = productsSnap.docs.map((doc) => ({
+                id: doc.id,
+                ...(doc.data() as Omit<Product, "id">),
+            }));
+
+            const stores: Store[] = storesSnap.docs.map((doc) => ({
+                id: doc.id,
+                ...(doc.data() as Omit<Store, "id">),
+            }));
+
+            return NextResponse.json({ products, stores });
         }
     } catch (error) {
+        console.error("Search error:", error);
         return NextResponse.json(
-            { error: error instanceof Error ? error.message : 'Failed to search' },
+            { error: error instanceof Error ? error.message : "Failed to search" },
             { status: 500 }
         );
     }
