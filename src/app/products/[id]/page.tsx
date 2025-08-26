@@ -126,10 +126,10 @@ export default function ProductPage(props: {
                     <div className="pt-4 border-t border-gray-200">
                         <h2 className="text-lg font-semibold text-gray-900">Sanitätshaus</h2>
                         <div className="mt-2 space-y-1">
-                            <p className="text-gray-600">{product.storeId.name}</p>
+                            <p className="text-gray-600">{product.store?.name}</p>
                             <div className="flex items-center gap-1 text-gray-600">
                                 <MapPin className="h-4 w-4" />
-                                <p>{product.storeId.location}</p>
+                                <p>{product.store?.location}</p>
                             </div>
                         </div>
                     </div>
