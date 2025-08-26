@@ -7,7 +7,7 @@ const db = firebaseAdmin.firestore();
 const productsRef = db.collection("storeProducts");
 const storesRef = db.collection("stores");
 
-type StorePreview = Pick<Store, "id" | "name" | "location" | "userId">;
+type StorePreview = Pick<Store, "id" | "name" | "location" | "userId" | "name_lowercase" | "location_lowercase">;
 
 export async function GET() {
     try {
@@ -38,6 +38,8 @@ export async function GET() {
                                 name: storeData.name,
                                 location: storeData.location,
                                 userId: storeData.userId,
+                                name_lowercase: storeData.name_lowercase,
+                                location_lowercase: storeData.location_lowercase,
                             };
                         }
                     }

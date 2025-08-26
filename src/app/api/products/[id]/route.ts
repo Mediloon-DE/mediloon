@@ -31,7 +31,7 @@ export async function GET(
         const productData = productDoc.data() as Omit<Product, "id">;
 
         // Fetch store (like mongoose populate)
-        let store: Pick<Store, "id" | "name" | "location" | "userId"> | null = null;
+        let store: Pick<Store, "id" | "name" | "location" | "userId" | "name_lowercase" | "location_lowercase"> | null = null;
         if (productData.storeId) {
             const storeDoc = await storesRef.doc(productData.storeId).get();
             if (storeDoc.exists) {
@@ -41,6 +41,8 @@ export async function GET(
                     name: storeData.name,
                     location: storeData.location,
                     userId: storeData.userId,
+                    name_lowercase: storeData.name_lowercase,
+                    location_lowercase: storeData.location_lowercase,
                 };
             }
         }

@@ -91,7 +91,7 @@ export function HeroCarousel() {
 
                                     <div className="flex flex-col h-full px-4 md:px-0 gap-5">
                                         <p className="mt-3 md:mt-4 text-base md:text-lg text-gray-600 line-clamp-3 text-end">
-                                            {product.store.name}
+                                            {product.store?.name}
                                         </p>
                                         <div className="flex-grow">
                                             <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
