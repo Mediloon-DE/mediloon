@@ -12,12 +12,10 @@ export default function Navbar() {
     return (
         <nav className="bg-white">
             <div className="max-w-full mx-auto px-4 sm:px-6">
-                <div className="flex justify-between h-16 items-center">
+                <div className="flex justify-between h-auto items-center">
                     {/* Logo */}
                     <div className="flex items-center md:flex-1">
-                        <Link href="/" className="">
-                            <Logo className={"font-bold text-gray-900"} />
-                        </Link>
+                        <Logo className={"font-bold text-gray-900"} />
                     </div>
 
                     {/* Search Box - Center */}
